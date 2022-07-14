@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "783728229685",
+    "project_id": "immuni-nation-2k21",
+    "storage_bucket": "immuni-nation-2k21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783728229685:android:1e7d79f0d1e026295de07c",
+        "android_client_info": {
+          "package_name": "com.codewithjosh.ImmuniNation2k21"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783728229685-v3fve2blavfr0e4rbtks4vcrvu0knfha.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9_j9MtLMZqSSf_9a6Kbc0frw910MToyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783728229685-v3fve2blavfr0e4rbtks4vcrvu0knfha.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
