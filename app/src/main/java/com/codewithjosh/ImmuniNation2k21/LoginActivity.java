@@ -45,8 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void initViews()
-    {
+    private void initViews() {
 
         getWindow().setStatusBarColor(getColor(R.color.color_dark_cyan));
 
@@ -57,22 +56,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void initInstances()
-    {
+    private void initInstances() {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
     }
 
-    private void initSharedPref()
-    {
+    private void initSharedPref() {
 
         editor = getSharedPreferences("user", MODE_PRIVATE).edit();
 
     }
 
-    private void buildButtons()
-    {
+    private void buildButtons() {
 
         navRegister.setOnClickListener(v ->
         {
@@ -95,16 +91,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void getString()
-    {
+    private void getString() {
 
         email = etEmail.getText().toString().toLowerCase();
         password = etPassword.getText().toString();
 
     }
 
-    private boolean validate(final View v)
-    {
+    private boolean validate(final View v) {
 
         pd = new ProgressDialog(this);
         pd.setMessage("Logging in");
@@ -114,9 +108,11 @@ public class LoginActivity extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
         if (getCurrentFocus() != null) getCurrentFocus().clearFocus();
 
-        if (!isConnected()) Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+        if (!isConnected())
+            Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
 
-        else if (email.isEmpty() || password.isEmpty()) Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
+        else if (email.isEmpty() || password.isEmpty())
+            Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
 
         else if (!(email.contains("@") && email.endsWith(".com"))
                 || email.startsWith("@")
@@ -124,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
                 || email.length() < 19)
             Toast.makeText(this, "Provide a valid Email Address", Toast.LENGTH_SHORT).show();
 
-        else if (password.length() < 6) Toast.makeText(this, "Password Must be at least 6 characters", Toast.LENGTH_SHORT).show();
+        else if (password.length() < 6)
+            Toast.makeText(this, "Password Must be at least 6 characters", Toast.LENGTH_SHORT).show();
 
         else return true;
 
@@ -132,8 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private boolean isConnected()
-    {
+    private boolean isConnected() {
 
         final ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -141,8 +137,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void onLogin()
-    {
+    private void onLogin() {
 
         firebaseAuth
                 .signInWithEmailAndPassword(email, password)
@@ -151,8 +146,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     firebaseUser = authResult.getUser();
 
-                    if (firebaseUser != null)
-                    {
+                    if (firebaseUser != null) {
 
                         final String userId = firebaseUser.getUid();
 
@@ -171,13 +165,17 @@ public class LoginActivity extends AppCompatActivity {
 
                     final String _e = e.toString().toLowerCase();
 
-                    if (_e.contains("there is no user record corresponding to this identifier")) Toast.makeText(this, "User Doesn't Exist!", Toast.LENGTH_SHORT).show();
+                    if (_e.contains("there is no user record corresponding to this identifier"))
+                        Toast.makeText(this, "User Doesn't Exist!", Toast.LENGTH_SHORT).show();
 
-                    else if (_e.contains("the password is invalid or the user does not have a password")) Toast.makeText(this, "Incorrect Password!", Toast.LENGTH_SHORT).show();
+                    else if (_e.contains("the password is invalid or the user does not have a password"))
+                        Toast.makeText(this, "Incorrect Password!", Toast.LENGTH_SHORT).show();
 
-                    else if (_e.contains("a network error (such as timeout, interrupted connection or unreachable host) has occurred")) Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+                    else if (_e.contains("a network error (such as timeout, interrupted connection or unreachable host) has occurred"))
+                        Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
 
-                    else Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show();
 
                 });
 
