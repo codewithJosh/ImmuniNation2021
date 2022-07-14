@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isConnected() {
 
-        final ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnectedOrConnecting();
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
             final String userId = firebaseUser.getUid();
 
-            editor.putString("userId", userId);
+            editor.putString("user_id", userId);
             editor.apply();
             startActivity(new Intent(this, HomeActivity.class));
 
