@@ -64,16 +64,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void initInstances()
-    {
+    private void initInstances() {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
     }
 
-    private void buildButtons()
-    {
+    private void buildButtons() {
 
         navLogin.setOnClickListener(v ->
         {
@@ -96,8 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void getString()
-    {
+    private void getString() {
 
         firstName = etFirstName.getText().toString().trim();
         lastName = etLastName.getText().toString().trim();
@@ -106,8 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private boolean validate(final View v)
-    {
+    private boolean validate(final View v) {
 
         pd = new ProgressDialog(this);
         pd.setMessage("Signing up");
@@ -117,7 +113,8 @@ public class RegisterActivity extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
         if (getCurrentFocus() != null) getCurrentFocus().clearFocus();
 
-        if (!isConnected()) Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+        if (!isConnected())
+            Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
 
         else if (firstName.isEmpty()
                 || lastName.isEmpty()
@@ -131,7 +128,8 @@ public class RegisterActivity extends AppCompatActivity {
                 || email.length() < 19)
             Toast.makeText(this, "Provide a valid Email Address", Toast.LENGTH_SHORT).show();
 
-        else if (password.length() < 6) Toast.makeText(this, "Password Must be at least 6 characters", Toast.LENGTH_SHORT).show();
+        else if (password.length() < 6)
+            Toast.makeText(this, "Password Must be at least 6 characters", Toast.LENGTH_SHORT).show();
 
         else return true;
 
@@ -139,8 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private boolean isConnected()
-    {
+    private boolean isConnected() {
 
         final ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -148,8 +145,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void onRegister()
-    {
+    private void onRegister() {
 
         firebaseAuth
                 .createUserWithEmailAndPassword(email, password)
@@ -158,8 +154,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     firebaseUser = firebaseAuth.getCurrentUser();
 
-                    if (firebaseUser != null)
-                    {
+                    if (firebaseUser != null) {
 
                         final String userId = firebaseUser.getUid();
                         final String userImage = "https://firebasestorage.googleapis.com/v0/b/immuni-nation-2k21.appspot.com/o/Res_20220702%2Fdefault_user_image.png?alt=media&token=ccc826c9-807b-4904-a7fd-5bebb1283f2c";
@@ -186,18 +181,20 @@ public class RegisterActivity extends AppCompatActivity {
 
                     final String _e = e.toString().toLowerCase();
 
-                    if (_e.contains("the email address is already in use by another account")) Toast.makeText(this, "Email is Already Exist!", Toast.LENGTH_SHORT).show();
+                    if (_e.contains("the email address is already in use by another account"))
+                        Toast.makeText(this, "Email is Already Exist!", Toast.LENGTH_SHORT).show();
 
-                    else if (_e.contains("a network error (such as timeout, interrupted connection or unreachable host) has occurred")) Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+                    else if (_e.contains("a network error (such as timeout, interrupted connection or unreachable host) has occurred"))
+                        Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
 
-                    else Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show();
 
                 });
 
     }
 
-    private void setUser(final String userId, final UserModel user)
-    {
+    private void setUser(final String userId, final UserModel user) {
 
         documentRef = firebaseFirestore
                 .collection("Users")
