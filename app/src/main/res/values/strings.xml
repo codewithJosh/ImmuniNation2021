@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ImmuniNation</string>
+    <string name="text_login">Log in</string>
+    <string name="digits_email">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@.</string>
+    <string name="hint_email">Email</string>
+    <string name="digits_password">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^*-=_+:;,.?</string>
+    <string name="hint_password">Password</string>
+    <string name="text_register">Create an Account</string>
 </resources>
