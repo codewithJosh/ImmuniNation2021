@@ -1,65 +1,118 @@
 package com.codewithjosh.ImmuniNation2k21.fragments.admins;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.codewithjosh.ImmuniNation2k21.R;
+import com.codewithjosh.ImmuniNation2k21.models.UserModel;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminScheduleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class AdminScheduleFragment extends Fragment {
+import de.hdodenhof.circleimageview.CircleImageView;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class AdminScheduleFragment extends Fragment
+{
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public AdminScheduleFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AdminScheduleFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AdminScheduleFragment newInstance(String param1, String param2) {
-        AdminScheduleFragment fragment = new AdminScheduleFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    Button btnLogout;
+    CircleImageView civUserImage;
+    ImageButton navCreateSlot;
+    RecyclerView recyclerSlots;
+    TextView tvUserName;
+    String userId;
+    Context context;
+    FirebaseFirestore firebaseFirestore;
+    SharedPreferences sharedPref;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_schedule, container, false);
+        View view = inflater.inflate(R.layout.fragment_admin_schedule, container, false);
+
+        initViews(view);
+        initInstances();
+        initSharedPref();
+        load();
+        loadUser();
+
+        return view;
+
     }
+
+    private void initViews(final View view)
+    {
+
+        if (getContext() != null) context = getContext();
+
+        tvUserName = view.findViewById(R.id.tv_user_name);
+        civUserImage = view.findViewById(R.id.civ_user_image);
+        btnLogout = view.findViewById(R.id.btn_logout);
+        navCreateSlot = view.findViewById(R.id.nav_create_slot);
+        recyclerSlots = view.findViewById(R.id.recycler_slots);
+
+    }
+
+    private void initInstances()
+    {
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+    }
+
+    private void initSharedPref()
+    {
+
+        sharedPref = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+
+    }
+
+    private void load()
+    {
+
+        userId = sharedPref.getString("user_id", String.valueOf(Context.MODE_PRIVATE));
+
+    }
+
+    private void loadUser()
+    {
+
+        firebaseFirestore
+                .collection("Users")
+                .document(userId)
+                .addSnapshotListener((value, error) ->
+                {
+
+                    if (value != null && value.exists())
+                    {
+
+                        final UserModel user = value.toObject(UserModel.class);
+
+                        if (user != null)
+                        {
+
+                            final String userName = "Hello! ".concat(user.getUser_first_name());
+                            final String userImage = user.getUser_image();
+
+                            tvUserName.setText(userName);
+                            Glide.with(context).load(userImage).into(civUserImage);
+
+                        }
+
+                    }
+
+                });
+
+    }
+
 }
