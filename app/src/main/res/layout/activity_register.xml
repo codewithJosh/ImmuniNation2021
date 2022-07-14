@@ -1,8 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivHeaderRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/header_register"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivHeaderRegister"
+            tools:layout_editor_absoluteX="20dp">
+
+            <TextView
+                android:id="@+id/tvCreate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_register"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints="no"
+                android:background="@color/color_chinese_white"
+                android:digits="@string/digits_name"
+                android:hint="@string/hint_first_name"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"
+                android:maxLength="16"
+                android:paddingHorizontal="10dp"
+                android:singleLine="true"
+                android:textColor="?attr/colorPrimary"
+                android:textColorHint="?attr/colorSecondary"
+                android:textSize="8pt"
+                app:layout_constraintTop_toBottomOf="@id/tvCreate" />
+
+            <EditText
+                android:id="@+id/et_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints="no"
+                android:background="@color/color_chinese_white"
+                android:digits="@string/digits_name"
+                android:hint="@string/hint_last_name"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"
+                android:maxLength="16"
+                android:paddingHorizontal="10dp"
+                android:singleLine="true"
+                android:textColor="?attr/colorPrimary"
+                android:textColorHint="?attr/colorSecondary"
+                android:textSize="8pt"
+                app:layout_constraintTop_toBottomOf="@id/et_first_name" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints="no"
+                android:background="@color/color_chinese_white"
+                android:digits="@string/digits_email"
+                android:hint="@string/hint_email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLength="40"
+                android:paddingHorizontal="10dp"
+                android:singleLine="true"
+                android:textColor="?attr/colorPrimary"
+                android:textColorHint="?attr/colorSecondary"
+                android:textSize="8pt"
+                app:layout_constraintTop_toBottomOf="@id/et_last_name" />
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints="no"
+                android:background="@color/color_chinese_white"
+                android:digits="@string/digits_password"
+                android:hint="@string/hint_password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLength="32"
+                android:paddingHorizontal="10dp"
+                android:singleLine="true"
+                android:textColor="?attr/colorPrimary"
+                android:textColorHint="?attr/colorSecondary"
+                android:textSize="8pt"
+                app:layout_constraintTop_toBottomOf="@id/et_email" />
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/create_negative_180_angle_button"
+                android:text="@string/text_button_register"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+            <LinearLayout
+                android:id="@+id/nav_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_register">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account? "
+                    android:textColor="@color/color_eerie_black"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_login"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

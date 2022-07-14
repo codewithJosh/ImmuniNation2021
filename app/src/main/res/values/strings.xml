@@ -6,4 +6,8 @@
     <string name="digits_password">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^*-=_+:;,.?</string>
     <string name="hint_password">Password</string>
     <string name="text_register">Create an Account</string>
+    <string name="digits_name">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="text_button_register">Create Account</string>
 </resources>
