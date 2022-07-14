@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
 
                         bottomNavigation.setSelectedItemId(
                                 userIsAdmin
-                                        ? R.id.nav_schedule_admin
+                                        ? R.id.nav_admin_schedule
                                         : R.id.nav_schedule
                         );
 
@@ -113,7 +113,7 @@ public class HomeActivity extends AppCompatActivity {
 
         if (itemId == R.id.nav_profile) return new ProfileFragment();
 
-        else if (itemId == R.id.nav_schedule_admin) return new AdminScheduleFragment();
+        else if (itemId == R.id.nav_admin_schedule) return new AdminScheduleFragment();
 
         else if (itemId == R.id.nav_request_admin) return new AdminRequestFragment();
 
