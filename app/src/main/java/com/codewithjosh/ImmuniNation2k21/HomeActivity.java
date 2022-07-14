@@ -1,8 +1,8 @@
 package com.codewithjosh.ImmuniNation2k21;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
 

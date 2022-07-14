@@ -13,15 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
 
     FirebaseUser firebaseUser;
     SharedPreferences.Editor editor;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -34,24 +32,20 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
 
-                try
-                {
+                try {
 
                     sleep(3000);
 
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
 
                     e.printStackTrace();
 
-                }
-                finally
-                {
+                } finally {
 
                     if (isConnected()) checkCurrentAuthState();
 
-                    else runOnUiThread(() -> Toast.makeText(MainActivity.this, "No Internet Connection!", Toast.LENGTH_LONG).show());
+                    else
+                        runOnUiThread(() -> Toast.makeText(MainActivity.this, "No Internet Connection!", Toast.LENGTH_LONG).show());
 
                 }
 
@@ -63,23 +57,20 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void initViews()
-    {
+    private void initViews() {
 
         getWindow().setNavigationBarColor(getColor(R.color.color_blue_green));
         getWindow().setStatusBarColor(getColor(R.color.color_dark_cyan));
 
     }
 
-    private void initSharedPref()
-    {
+    private void initSharedPref() {
 
         editor = getSharedPreferences("user", MODE_PRIVATE).edit();
 
     }
 
-    private boolean isConnected()
-    {
+    private boolean isConnected() {
 
         final ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -87,13 +78,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void checkCurrentAuthState()
-    {
+    private void checkCurrentAuthState() {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (firebaseUser != null)
-        {
+        if (firebaseUser != null) {
 
             final String userId = firebaseUser.getUid();
 
@@ -101,8 +90,7 @@ public class MainActivity extends AppCompatActivity
             editor.apply();
             startActivity(new Intent(this, HomeActivity.class));
 
-        }
-        else startActivity(new Intent(this, LoginActivity.class));
+        } else startActivity(new Intent(this, LoginActivity.class));
 
         finish();
 
