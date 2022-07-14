@@ -16,4 +16,5 @@
     <string name="title_request_admin">Admin Request</string>
     <string name="title_schedule">Schedule</string>
     <string name="title_profile">Profile</string>
+    <string name="text_button_logout">Log out</string>
 </resources>
