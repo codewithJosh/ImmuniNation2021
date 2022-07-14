@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_schedule_admin"
+        android:icon="@drawable/slot_selector"
+        android:title="@string/title_schedule_admin" />
+    <item
+        android:id="@+id/nav_request_admin"
+        android:icon="@drawable/request_admin_selector"
+        android:title="@string/title_request_admin" />
+</menu>
