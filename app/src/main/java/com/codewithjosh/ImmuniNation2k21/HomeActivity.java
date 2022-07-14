@@ -33,22 +33,19 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void initViews()
-    {
+    private void initViews() {
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
     }
 
-    private void initInstances()
-    {
+    private void initInstances() {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
     }
 
-    private void load()
-    {
+    private void load() {
 
         sharedPref = getSharedPreferences("user", MODE_PRIVATE);
 
@@ -58,16 +55,14 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void checkUserAdmin(final String userId)
-    {
+    private void checkUserAdmin(final String userId) {
 
         firebaseFirestore
                 .collection("Users")
                 .document(userId)
                 .addSnapshotListener((value, error) -> {
 
-                    if (value != null)
-                    {
+                    if (value != null) {
 
                         final UserModel user = value.toObject(UserModel.class);
 
@@ -100,8 +95,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void buildButtons()
-    {
+    private void buildButtons() {
 
         bottomNavigation.setOnItemSelectedListener(item ->
         {
@@ -113,8 +107,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private Fragment getFragment(final MenuItem item)
-    {
+    private Fragment getFragment(final MenuItem item) {
 
         final int itemId = item.getItemId();
 
