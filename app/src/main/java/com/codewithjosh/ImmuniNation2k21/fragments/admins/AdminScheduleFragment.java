@@ -25,8 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdminScheduleFragment extends Fragment
-{
+public class AdminScheduleFragment extends Fragment {
 
     Button btnLogout;
     CircleImageView civUserImage;
@@ -42,8 +41,7 @@ public class AdminScheduleFragment extends Fragment
     SharedPreferences.Editor editor;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_admin_schedule, container, false);
@@ -59,8 +57,7 @@ public class AdminScheduleFragment extends Fragment
 
     }
 
-    private void initViews(final View view)
-    {
+    private void initViews(final View view) {
 
         if (getContext() != null) context = getContext();
 
@@ -72,31 +69,27 @@ public class AdminScheduleFragment extends Fragment
 
     }
 
-    private void initInstances()
-    {
+    private void initInstances() {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
     }
 
-    private void initSharedPref()
-    {
+    private void initSharedPref() {
 
         sharedPref = context.getSharedPreferences("user", Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
     }
 
-    private void load()
-    {
+    private void load() {
 
         userId = sharedPref.getString("user_id", String.valueOf(Context.MODE_PRIVATE));
 
     }
 
-    private void loadUser()
-    {
+    private void loadUser() {
 
         firebaseFirestore
                 .collection("Users")
@@ -104,13 +97,11 @@ public class AdminScheduleFragment extends Fragment
                 .addSnapshotListener((value, error) ->
                 {
 
-                    if (value != null && value.exists())
-                    {
+                    if (value != null && value.exists()) {
 
                         final UserModel user = value.toObject(UserModel.class);
 
-                        if (user != null)
-                        {
+                        if (user != null) {
 
                             final String userName = "Hello! ".concat(user.getUser_first_name());
                             final String userImage = user.getUser_image();
