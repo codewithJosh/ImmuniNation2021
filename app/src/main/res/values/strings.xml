@@ -17,4 +17,25 @@
     <string name="title_schedule">Schedule</string>
     <string name="title_profile">Profile</string>
     <string name="text_button_logout">Log out</string>
+    <string name="text_select">Select a date</string>
+    <string name="hint_enter">Enter a value</string>
+    <string name="text_button_create">Create Slot</string>
+
+    <string-array name="VaccineNames">
+        <item>Select a Vaccine</item>
+        <item>Pfizer-BioNTech</item>
+        <item>Moderna</item>
+        <item>Johnson and Johnson</item>
+        <item>SinoVac</item>
+        <item>AstraZeneca</item>
+    </string-array>
+
+    <string-array name="VaccineSites">
+        <item>Select Vaccine Site</item>
+        <item>Arenas Complex</item>
+        <item>City Mall</item>
+        <item>Manzon</item>
+        <item>Talang</item>
+        <item>Pagal</item>
+    </string-array>
 </resources>
