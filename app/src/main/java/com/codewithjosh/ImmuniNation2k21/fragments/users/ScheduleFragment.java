@@ -21,8 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.codewithjosh.ImmuniNation2k21.R;
 import com.codewithjosh.ImmuniNation2k21.adapters.SlotAdapter;
+import com.codewithjosh.ImmuniNation2k21.adapters.VaccineAdapter;
 import com.codewithjosh.ImmuniNation2k21.models.SlotModel;
 import com.codewithjosh.ImmuniNation2k21.models.UserModel;
+import com.codewithjosh.ImmuniNation2k21.models.VaccineModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -50,6 +52,7 @@ public class ScheduleFragment extends Fragment
     SharedPreferences sharedPref;
     private SlotAdapter slotAdapter;
     private List<SlotModel> slots;
+    VaccineAdapter vaccineAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -90,6 +93,17 @@ public class ScheduleFragment extends Fragment
         slots = new ArrayList<>();
         slotAdapter = new SlotAdapter(getContext(), slots, R.layout.item_slot);
         recyclerSlots.setAdapter(slotAdapter);
+
+        initRecyclerView(recyclerVaccines);
+
+        final List<VaccineModel> vaccines = new ArrayList<>();
+        vaccines.add(new VaccineModel(R.drawable.img_pfizer, "Pfizer-BioNTech"));
+        vaccines.add(new VaccineModel(R.drawable.img_moderna, "Moderna"));
+        vaccines.add(new VaccineModel(R.drawable.img_johnson_johnson, "Johnson & Johnson"));
+        vaccines.add(new VaccineModel(R.drawable.img_sinovac, "SinoVac"));
+        vaccines.add(new VaccineModel(R.drawable.img_astra_zeneca, "AstraZeneca"));
+        vaccineAdapter = new VaccineAdapter(getActivity(), vaccines);
+        recyclerVaccines.setAdapter(vaccineAdapter);
 
     }
 
