@@ -1,17 +1,20 @@
 package com.codewithjosh.ImmuniNation2k21.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.codewithjosh.ImmuniNation2k21.CreateRequestActivity;
 import com.codewithjosh.ImmuniNation2k21.R;
 import com.codewithjosh.ImmuniNation2k21.models.SlotModel;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -114,6 +117,46 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
                         ).into(ivVaccineImage);
 
                         tvVaccineSlots.setText(vaccineSlotsFormat);
+
+                        holder.itemView.setOnClickListener(v ->
+                        {
+
+                            if (itemSlot == R.layout.item_slot)
+                            {
+
+                                if (availableSlots != 0)
+                                {
+
+                                    firebaseFirestore
+                                            .collection("Requests")
+                                            .whereEqualTo("user_id", userId)
+                                            .get()
+                                            .addOnSuccessListener(queryDocumentSnapshots ->
+                                            {
+
+                                                if (queryDocumentSnapshots != null)
+                                                {
+
+                                                    if (queryDocumentSnapshots.isEmpty())
+                                                    {
+
+                                                        editor.putString("slot_id", slotId);
+                                                        editor.apply();
+                                                        context.startActivity(new Intent(context, CreateRequestActivity.class));
+
+                                                    }
+                                                    else Toast.makeText(context, "You've already responded", Toast.LENGTH_SHORT).show();
+
+                                                }
+
+                                            });
+
+                                }
+                                else Toast.makeText(context, "Not Available!", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        });
 
                     }
 

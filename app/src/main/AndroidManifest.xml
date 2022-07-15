@@ -14,6 +14,10 @@
         android:theme="@style/Theme.ImmuniNation"
         tools:targetApi="31">
         <activity
+            android:name=".CreateRequestActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name=".CreateSlotActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
