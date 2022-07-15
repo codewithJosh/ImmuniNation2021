@@ -1,6 +1,8 @@
 package com.codewithjosh.ImmuniNation2k21.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codewithjosh.ImmuniNation2k21.R;
+import com.codewithjosh.ImmuniNation2k21.ViewVaccineActivity;
 import com.codewithjosh.ImmuniNation2k21.models.VaccineModel;
 
 import java.util.List;
@@ -20,6 +23,7 @@ public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.InfoView
 
     public Context context;
     public List<VaccineModel> vaccines;
+    SharedPreferences.Editor editor;
 
     public VaccineAdapter(final Context context, final List<VaccineModel> vaccines)
     {
@@ -53,8 +57,28 @@ public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.InfoView
         final int vaccineImage = vaccine.getVaccine_image();
         final String vaccineName = vaccine.getVaccine_name();
 
+        initSharedPref();
+
         ivVaccineImage.setImageResource(vaccineImage);
         tvVaccineName.setText(vaccineName);
+
+        holder.itemView.setOnClickListener(v ->
+        {
+
+            editor.putInt("vaccine_id", position);
+            editor.putInt("vaccine_image", vaccineImage);
+            editor.putString("vaccine_name", vaccineName);
+            editor.apply();
+            context.startActivity(new Intent(context, ViewVaccineActivity.class));
+
+        });
+
+    }
+
+    private void initSharedPref()
+    {
+
+        editor = context.getSharedPreferences("user", Context.MODE_PRIVATE).edit();
 
     }
 
