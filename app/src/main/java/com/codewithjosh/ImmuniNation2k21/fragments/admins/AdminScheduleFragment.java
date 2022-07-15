@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.codewithjosh.ImmuniNation2k21.CreateSlotActivity;
 import com.codewithjosh.ImmuniNation2k21.MainActivity;
 import com.codewithjosh.ImmuniNation2k21.R;
 import com.codewithjosh.ImmuniNation2k21.models.UserModel;
@@ -142,6 +143,8 @@ public class AdminScheduleFragment extends Fragment
             startActivity(i);
 
         });
+
+        navCreateSlot.setOnClickListener(v -> startActivity(new Intent(context, CreateSlotActivity.class)));
 
     }
 
