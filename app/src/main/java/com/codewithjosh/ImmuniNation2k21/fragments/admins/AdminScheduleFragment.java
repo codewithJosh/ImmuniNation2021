@@ -89,8 +89,7 @@ public class AdminScheduleFragment extends Fragment {
 
     }
 
-    private void initRecyclerView()
-    {
+    private void initRecyclerView() {
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerSlots.setLayoutManager(linearLayoutManager);
@@ -146,8 +145,7 @@ public class AdminScheduleFragment extends Fragment {
 
     }
 
-    private void loadSlots()
-    {
+    private void loadSlots() {
 
         firebaseFirestore
                 .collection("Slots")
@@ -155,12 +153,12 @@ public class AdminScheduleFragment extends Fragment {
                 .addSnapshotListener((value, error) ->
                 {
 
-                    if (value != null)
-                    {
+                    if (value != null) {
 
                         if (isConnected()) onLoadSlots(value);
 
-                        else Toast.makeText(context, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(context, "No Internet Connection!", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -168,8 +166,7 @@ public class AdminScheduleFragment extends Fragment {
 
     }
 
-    private boolean isConnected()
-    {
+    private boolean isConnected() {
 
         final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -177,12 +174,10 @@ public class AdminScheduleFragment extends Fragment {
 
     }
 
-    private void onLoadSlots(final QuerySnapshot value)
-    {
+    private void onLoadSlots(final QuerySnapshot value) {
 
         slots.clear();
-        for (QueryDocumentSnapshot snapshot : value)
-        {
+        for (QueryDocumentSnapshot snapshot : value) {
 
             final SlotModel slot = snapshot.toObject(SlotModel.class);
             slots.add(slot);

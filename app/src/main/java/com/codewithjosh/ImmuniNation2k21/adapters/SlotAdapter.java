@@ -24,8 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
-{
+public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder> {
 
     public Context context;
     public List<SlotModel> slots;
@@ -36,8 +35,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
-    public SlotAdapter(final Context context, final List<SlotModel> slots, final int itemSlot)
-    {
+    public SlotAdapter(final Context context, final List<SlotModel> slots, final int itemSlot) {
 
         this.context = context;
         this.slots = slots;
@@ -46,8 +44,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
     }
 
     @NonNull
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-    {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(itemSlot, parent, false);
         return new ViewHolder(view);
@@ -55,8 +52,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         final SlotModel slot = slots.get(position);
 
@@ -84,7 +80,8 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
         tvVaccineSite.setText(vaccineSite);
 
         dateFormat = new SimpleDateFormat(vaccineFirstDoseDateFormat);
-        if (vaccineFirstDoseDate != null) tvVaccineFirstDoseDate.setText(dateFormat.format(vaccineFirstDoseDate));
+        if (vaccineFirstDoseDate != null)
+            tvVaccineFirstDoseDate.setText(dateFormat.format(vaccineFirstDoseDate));
 
         firebaseFirestore
                 .collection("Requests")
@@ -92,8 +89,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
                 .addSnapshotListener((value, error) ->
                 {
 
-                    if (value != null)
-                    {
+                    if (value != null) {
 
                         final int currentSlots = value.size();
                         final int availableSlots = vaccineSlots - currentSlots;
@@ -121,11 +117,9 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
                         holder.itemView.setOnClickListener(v ->
                         {
 
-                            if (itemSlot == R.layout.item_slot)
-                            {
+                            if (itemSlot == R.layout.item_slot) {
 
-                                if (availableSlots != 0)
-                                {
+                                if (availableSlots != 0) {
 
                                     firebaseFirestore
                                             .collection("Requests")
@@ -134,25 +128,23 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
                                             .addOnSuccessListener(queryDocumentSnapshots ->
                                             {
 
-                                                if (queryDocumentSnapshots != null)
-                                                {
+                                                if (queryDocumentSnapshots != null) {
 
-                                                    if (queryDocumentSnapshots.isEmpty())
-                                                    {
+                                                    if (queryDocumentSnapshots.isEmpty()) {
 
                                                         editor.putString("slot_id", slotId);
                                                         editor.apply();
                                                         context.startActivity(new Intent(context, CreateRequestActivity.class));
 
-                                                    }
-                                                    else Toast.makeText(context, "You've already responded", Toast.LENGTH_SHORT).show();
+                                                    } else
+                                                        Toast.makeText(context, "You've already responded", Toast.LENGTH_SHORT).show();
 
                                                 }
 
                                             });
 
-                                }
-                                else Toast.makeText(context, "Not Available!", Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(context, "Not Available!", Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -164,38 +156,33 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
 
     }
 
-    private void initInstances()
-    {
+    private void initInstances() {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
     }
 
-    private void initSharedPref()
-    {
+    private void initSharedPref() {
 
         sharedPref = context.getSharedPreferences("user", Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
     }
 
-    private void load()
-    {
+    private void load() {
 
         userId = sharedPref.getString("user_id", String.valueOf(Context.MODE_PRIVATE));
 
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
 
         return slots.size();
 
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView ivVaccineImage;
         public TextView tvVaccineName;
@@ -203,8 +190,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>
         public TextView tvVaccineSlots;
         public TextView tvVaccineFirstDoseDate;
 
-        public ViewHolder(@NonNull View itemView)
-        {
+        public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
 

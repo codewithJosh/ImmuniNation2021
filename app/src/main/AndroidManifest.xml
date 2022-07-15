@@ -16,7 +16,7 @@
         <activity
             android:name=".ViewVaccineActivity"
             android:exported="false"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".CreateRequestActivity"
             android:exported="false"

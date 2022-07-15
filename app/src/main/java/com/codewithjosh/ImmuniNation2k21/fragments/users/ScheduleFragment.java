@@ -34,8 +34,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ScheduleFragment extends Fragment
-{
+public class ScheduleFragment extends Fragment {
 
     CircleImageView civUserImage;
     ImageButton navSchedule;
@@ -50,13 +49,12 @@ public class ScheduleFragment extends Fragment
     Context context;
     FirebaseFirestore firebaseFirestore;
     SharedPreferences sharedPref;
+    VaccineAdapter vaccineAdapter;
     private SlotAdapter slotAdapter;
     private List<SlotModel> slots;
-    VaccineAdapter vaccineAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
@@ -72,8 +70,7 @@ public class ScheduleFragment extends Fragment
 
     }
 
-    private void initViews(final View view)
-    {
+    private void initViews(final View view) {
 
         if (getContext() != null) context = getContext();
         if (getActivity() != null) activity = getActivity();
@@ -107,29 +104,25 @@ public class ScheduleFragment extends Fragment
 
     }
 
-    private void initInstances()
-    {
+    private void initInstances() {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
     }
 
-    private void initSharedPref()
-    {
+    private void initSharedPref() {
 
         sharedPref = context.getSharedPreferences("user", Context.MODE_PRIVATE);
 
     }
 
-    private void load()
-    {
+    private void load() {
 
         userId = sharedPref.getString("user_id", String.valueOf(Context.MODE_PRIVATE));
 
     }
 
-    private void loadUser()
-    {
+    private void loadUser() {
 
         firebaseFirestore
                 .collection("Users")
@@ -137,13 +130,11 @@ public class ScheduleFragment extends Fragment
                 .addSnapshotListener((value, error) ->
                 {
 
-                    if (value != null)
-                    {
+                    if (value != null) {
 
                         final UserModel user = value.toObject(UserModel.class);
 
-                        if (user != null)
-                        {
+                        if (user != null) {
 
                             final String userImage = user.getUser_image();
                             final String userName = user.getUser_first_name() + " " + user.getUser_last_name();
@@ -161,11 +152,9 @@ public class ScheduleFragment extends Fragment
 
     }
 
-    private String getVaccinationStatus(final int userVaccinationStatus)
-    {
+    private String getVaccinationStatus(final int userVaccinationStatus) {
 
-        switch (userVaccinationStatus)
-        {
+        switch (userVaccinationStatus) {
 
             case 0:
                 return "Not yet vaccinated";
@@ -178,8 +167,7 @@ public class ScheduleFragment extends Fragment
 
     }
 
-    private void initRecyclerView(final RecyclerView recyclerView)
-    {
+    private void initRecyclerView(final RecyclerView recyclerView) {
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 getActivity(),
@@ -192,8 +180,7 @@ public class ScheduleFragment extends Fragment
 
     }
 
-    private void loadSlots()
-    {
+    private void loadSlots() {
 
         firebaseFirestore
                 .collection("Slots")
@@ -201,12 +188,12 @@ public class ScheduleFragment extends Fragment
                 .addSnapshotListener((value, error) ->
                 {
 
-                    if (value != null)
-                    {
+                    if (value != null) {
 
                         if (isConnected()) onLoadSlots(value);
 
-                        else Toast.makeText(context, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(context, "No Internet Connection!", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -214,8 +201,7 @@ public class ScheduleFragment extends Fragment
 
     }
 
-    private boolean isConnected()
-    {
+    private boolean isConnected() {
 
         final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -223,12 +209,10 @@ public class ScheduleFragment extends Fragment
 
     }
 
-    private void onLoadSlots(final QuerySnapshot value)
-    {
+    private void onLoadSlots(final QuerySnapshot value) {
 
         slots.clear();
-        for (QueryDocumentSnapshot snapshot : value)
-        {
+        for (QueryDocumentSnapshot snapshot : value) {
 
             final SlotModel slot = snapshot.toObject(SlotModel.class);
             final String slotId = slot.getSlot_id();
@@ -240,8 +224,7 @@ public class ScheduleFragment extends Fragment
                     .addSnapshotListener((_value, error) ->
                     {
 
-                        if (_value != null)
-                        {
+                        if (_value != null) {
 
                             final int currentSlots = _value.size();
                             final int availableSlots = vaccineSlots - currentSlots;

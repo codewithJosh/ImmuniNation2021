@@ -18,15 +18,13 @@ import com.codewithjosh.ImmuniNation2k21.models.VaccineModel;
 
 import java.util.List;
 
-public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.InfoViewHolder>
-{
+public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.InfoViewHolder> {
 
     public Context context;
     public List<VaccineModel> vaccines;
     SharedPreferences.Editor editor;
 
-    public VaccineAdapter(final Context context, final List<VaccineModel> vaccines)
-    {
+    public VaccineAdapter(final Context context, final List<VaccineModel> vaccines) {
 
         this.context = context;
         this.vaccines = vaccines;
@@ -35,8 +33,7 @@ public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.InfoView
 
     @NonNull
     @Override
-    public InfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-    {
+    public InfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_vaccine, parent, false);
         return new InfoViewHolder(view);
@@ -44,8 +41,7 @@ public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.InfoView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InfoViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull InfoViewHolder holder, int position) {
 
         final VaccineModel vaccine = vaccines.get(position);
 
@@ -75,29 +71,25 @@ public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.InfoView
 
     }
 
-    private void initSharedPref()
-    {
+    private void initSharedPref() {
 
         editor = context.getSharedPreferences("user", Context.MODE_PRIVATE).edit();
 
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
 
         return vaccines.size();
 
     }
 
-    public static class InfoViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class InfoViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView ivVaccineImage;
         public TextView tvVaccineName;
 
-        public InfoViewHolder(@NonNull View itemView)
-        {
+        public InfoViewHolder(@NonNull View itemView) {
 
             super(itemView);
 
