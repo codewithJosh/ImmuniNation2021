@@ -30,8 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CreateSlotActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
-{
+public class CreateSlotActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Button btnCreateSlot;
     EditText etVaccineSlots;
@@ -54,8 +53,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
     ProgressDialog pd;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_slot);
@@ -67,8 +65,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private void initViews()
-    {
+    private void initViews() {
 
         btnCreateSlot = findViewById(R.id.btn_create_slot);
         etVaccineSlots = findViewById(R.id.et_vaccine_slots);
@@ -79,16 +76,14 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private void initInstances()
-    {
+    private void initInstances() {
 
         calendar = Calendar.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
     }
 
-    private void load()
-    {
+    private void load() {
 
         vaccineNames = getResources().getStringArray(R.array.VaccineNames);
         vaccineSites = getResources().getStringArray(R.array.VaccineSites);
@@ -101,8 +96,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private void build()
-    {
+    private void build() {
 
         initSpinner(vaccineNames, sVaccineName);
         initSpinner(vaccineSites, sVaccineSite);
@@ -124,21 +118,17 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private void get()
-    {
+    private void get() {
 
         final String vaccineFirstDoseDateFormat = String.valueOf(tvVaccineFirstDoseDate.getText());
         final String vaccineSecondDoseDateFormat = String.valueOf(tvVaccineSecondDoseDate.getText());
 
-        try
-        {
+        try {
 
             vaccineFirstDoseDate = dateFormat.parse(vaccineFirstDoseDateFormat);
             vaccineSecondDoseDate = dateFormat.parse(vaccineSecondDoseDateFormat);
 
-        }
-        catch (ParseException e)
-        {
+        } catch (ParseException e) {
 
             e.printStackTrace();
 
@@ -150,8 +140,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private boolean validate(final View v)
-    {
+    private boolean validate(final View v) {
 
         pd = new ProgressDialog(this);
         pd.setMessage("Creating slot");
@@ -161,14 +150,16 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
         inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
         if (getCurrentFocus() != null) getCurrentFocus().clearFocus();
 
-        if (!isConnected()) Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+        if (!isConnected())
+            Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
 
         else if (sVaccineName.getSelectedItemPosition() == 0
                 || sVaccineSite.getSelectedItemPosition() == 0
                 || vaccineSlots.isEmpty())
             Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
 
-        else if (Integer.parseInt(vaccineSlots) < 1) Toast.makeText(this, "Vaccination capacity cannot be less than 1!", Toast.LENGTH_SHORT).show();
+        else if (Integer.parseInt(vaccineSlots) < 1)
+            Toast.makeText(this, "Vaccination capacity cannot be less than 1!", Toast.LENGTH_SHORT).show();
 
         else return true;
 
@@ -176,8 +167,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private boolean isConnected()
-    {
+    private boolean isConnected() {
 
         final ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -185,8 +175,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private void initSpinner(final String[] items, final Spinner spinner)
-    {
+    private void initSpinner(final String[] items, final Spinner spinner) {
 
         spinner.setSelection(0);
         spinner.setOnItemSelectedListener(this);
@@ -200,8 +189,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private void onDatePickerDialog(final DatePickerDialog.OnDateSetListener dateSetListener)
-    {
+    private void onDatePickerDialog(final DatePickerDialog.OnDateSetListener dateSetListener) {
 
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
@@ -220,8 +208,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private DatePickerDialog.OnDateSetListener onDateSetListener(final TextView textView)
-    {
+    private DatePickerDialog.OnDateSetListener onDateSetListener(final TextView textView) {
 
         return (datePicker, year, month, day) ->
         {
@@ -233,8 +220,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private void onCreateSlot()
-    {
+    private void onCreateSlot() {
 
         final String slotId = firebaseFirestore
                 .collection("Slots")
@@ -257,11 +243,9 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private String getVaccineImage(final String vaccineName)
-    {
+    private String getVaccineImage(final String vaccineName) {
 
-        switch (vaccineName)
-        {
+        switch (vaccineName) {
 
             case "Pfizer-BioNTech":
                 return "https://firebasestorage.googleapis.com/v0/b/immuni-nation-2k21.appspot.com/o/Res_20220702%2Fimg_pfizer.jpg?alt=media&token=dc0c2f36-e1c5-4cfc-9d21-0cd84ade6440";
@@ -283,8 +267,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    private void setSlot(final String slotId, final SlotModel slot)
-    {
+    private void setSlot(final String slotId, final SlotModel slot) {
 
         documentRef = firebaseFirestore
                 .collection("Slots")
@@ -296,25 +279,23 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
             if (value != null && !value.exists())
 
                 documentRef
-                    .set(slot)
-                    .addOnSuccessListener(unused ->
-                    {
+                        .set(slot)
+                        .addOnSuccessListener(unused ->
+                        {
 
-                        pd.dismiss();
-                        onBackPressed();
+                            pd.dismiss();
+                            onBackPressed();
 
-                    });
+                        });
 
         });
 
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
-    {
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-        if (i != 0)
-        {
+        if (i != 0) {
 
             final String item = String.valueOf(adapterView.getItemAtPosition(i)).concat(" is selected");
             Toast.makeText(this, item, Toast.LENGTH_SHORT).show();
@@ -324,8 +305,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView)
-    {
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
