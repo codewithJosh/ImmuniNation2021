@@ -150,4 +150,52 @@
         <item>Turac</item>
         <item>Tangdang Sora</item>
     </string-array>
+
+    <string-array name="VaccineArmSideEffects">
+        <item>In the arm where you got the shot: \n\n•Pain\n•Redness\n•Swelling</item>
+        <item>In the arm where you got the shot: \n\n•Pain\n•Redness\n•Swelling</item>
+        <item>In the arm where you got the shot: \n\n•Pain\n•Redness\n•Swelling</item>
+        <item>In the arm where you got the shot: \n\n•Pain\n•Redness\n•Swelling</item>
+        <item>In the arm where you got the shot: \n\n•Pain\n•Redness\n•Swelling</item>
+    </string-array>
+
+    <string-array name="VaccineBodySideEffects">
+        <item>Throughout the rest of your body:\n\n•Tiredness\n•Headache\n•Muscle pain\n•Chills\n•Fever\n•Nausea</item>
+        <item>Throughout the rest of your body:\n\n•Tiredness\n•Headache\n•Muscle pain\n•Chills\n•Fever\n•Nausea</item>
+        <item>Throughout the rest of your body:\n\n•Tiredness\n•Headache\n•Muscle pain\n•Chills\n•Fever\n•Nausea</item>
+        <item>Throughout the rest of your body:\n\n•Fever\n•Fatigue\n•Muscle pain\n•Diarrhea</item>
+        <item>Throughout the rest of your body:\n\n•Fever\n•Discomfort\n•Fatigue\n•Muscle pain\n•Diarrhea\n•Nausea</item>
+    </string-array>
+
+    <string-array name="VaccineInformation">
+        <item>Pfizer-BioNTech (COMIRNATY) vaccine was 95% effective at preventing laboratory-confirmed infection with the virus that causes COVID-19 in people who received two doses and had no evidence of being previously infected.</item>
+        <item>Based on evidence from clinical trials, in people aged 18 years and older, the Moderna vaccine was 94.1% effective at preventing laboratory-confirmed COVID-19 infection in people who received two doses and had no evidence of being previously infected.</item>
+        <item>The JandJ/Janssen COVID-19 Vaccine was 66.3% effective in clinical trials (efficacy) at preventing laboratory-confirmed COVID-19 infection in people who received the vaccine. People had the most protection 2 weeks after getting vaccinated.</item>
+        <item>A large phase 3 trial in Brazil showed that two doses of 14 days interval, had an efficacy of 51% against symptomatic SARS-CoV-2 infection, 100% against severe COVID-19, and 100% against hospitalization starting 14 days after receiving the second dose.</item>
+        <item>The AZD1222 vaccine against COVID-19 has an efficacy of 63.09% against symptomatic COVID-19 infection. Longer dose intervals within the 8 to 12 weeks range are associated with greater vaccine efficacy.</item>
+    </string-array>
+
+    <string-array name="VaccineManufacturers">
+        <item>Pfizer, Inc., and BioNTech</item>
+        <item>Moderna, NIAID</item>
+        <item>Janssen Pharmaceutical Companies</item>
+        <item>Sinovac</item>
+        <item>Oxford Uni-AstraZeneca</item>
+    </string-array>
+
+    <string-array name="VaccineShots">
+        <item>2 doses at least 21 days apart</item>
+        <item>2 doses at least 28 days apart</item>
+        <item>1 dose</item>
+        <item>2 doses at least 2–4 weeks apart</item>
+        <item>2 doses at least 4–12 weeks apart</item>
+    </string-array>
+
+    <string-array name="VaccineTypes">
+        <item>messenger RNA (mRNA) vaccines</item>
+        <item>messenger RNA (mRNA) vaccines</item>
+        <item>Viral Vector</item>
+        <item>Inactive COVID-19 Virus</item>
+        <item>Viral Vector</item>
+    </string-array>
 </resources>
