@@ -2,8 +2,7 @@ package com.codewithjosh.ImmuniNation2k21.models;
 
 import java.util.Date;
 
-public class RequestModel
-{
+public class RequestModel {
 
     private String request_id;
     private int request_status;
@@ -19,13 +18,11 @@ public class RequestModel
     private String user_valid_id;
     private String user_valid_id_image;
 
-    public RequestModel()
-    {
+    public RequestModel() {
 
     }
 
-    public RequestModel(final String request_id, final int request_status, final String slot_id, final Date user_birth_date, final String user_category, final String user_contact, final String user_id, final String user_name, final String user_selfie_with_id, final String user_selfie_with_id_image, final String user_street, final String user_valid_id, final String user_valid_id_image)
-    {
+    public RequestModel(final String request_id, final int request_status, final String slot_id, final Date user_birth_date, final String user_category, final String user_contact, final String user_id, final String user_name, final String user_selfie_with_id, final String user_selfie_with_id_image, final String user_street, final String user_valid_id, final String user_valid_id_image) {
 
         this.request_id = request_id;
         this.request_status = request_status;
@@ -43,92 +40,79 @@ public class RequestModel
 
     }
 
-    public String getRequest_id()
-    {
+    public String getRequest_id() {
 
         return request_id;
 
     }
 
-    public int getRequest_status()
-    {
+    public int getRequest_status() {
 
         return request_status;
 
     }
 
-    public String getSlot_id()
-    {
+    public String getSlot_id() {
 
         return slot_id;
 
     }
 
-    public Date getUser_birth_date()
-    {
+    public Date getUser_birth_date() {
 
         return user_birth_date;
 
     }
 
-    public String getUser_category()
-    {
+    public String getUser_category() {
 
         return user_category;
 
     }
 
-    public String getUser_contact()
-    {
+    public String getUser_contact() {
 
         return user_contact;
 
     }
 
-    public String getUser_id()
-    {
+    public String getUser_id() {
 
         return user_id;
 
     }
 
-    public String getUser_name()
-    {
+    public String getUser_name() {
 
         return user_name;
 
     }
 
-    public String getUser_selfie_with_id()
-    {
+    public String getUser_selfie_with_id() {
 
         return user_selfie_with_id;
 
     }
 
-    public String getUser_selfie_with_id_image()
-    {
+    public String getUser_selfie_with_id_image() {
 
         return user_selfie_with_id_image;
 
     }
 
-    public String getUser_street()
-    {
+    public String getUser_street() {
 
         return user_street;
 
     }
 
-    public String getUser_valid_id()
-    {
+    public String getUser_valid_id() {
 
         return user_valid_id;
 
     }
 
-    public String getUser_valid_id_image()
-    {
+    public String getUser_valid_id_image() {
 
         return user_valid_id_image;
 

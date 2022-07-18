@@ -95,11 +95,10 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    private void initViews()
-    {
+    private void initViews() {
 
-        cameraPermission = new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE };
-        storagePermission = new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE };
+        cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         btnCreateRequest = findViewById(R.id.btn_create_request);
         etUserContact = findViewById(R.id.et_user_contact);
@@ -111,8 +110,7 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    private void initInstances()
-    {
+    private void initInstances() {
 
         calendar = Calendar.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -120,15 +118,13 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    private void initSharedPref()
-    {
+    private void initSharedPref() {
 
         sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE);
 
     }
 
-    private void load()
-    {
+    private void load() {
 
         slotId = sharedPref.getString("slot_id", String.valueOf(Context.MODE_PRIVATE));
         userId = sharedPref.getString("user_id", String.valueOf(Context.MODE_PRIVATE));
@@ -152,11 +148,11 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
                 .addOnSuccessListener(documentSnapshot ->
                 {
 
-                    if (documentSnapshot != null && documentSnapshot.exists())
-                    {
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
 
                         final UserModel user = documentSnapshot.toObject(UserModel.class);
-                        if (user != null) userName = user.getUser_first_name() + " " + user.getUser_last_name();
+                        if (user != null)
+                            userName = user.getUser_first_name() + " " + user.getUser_last_name();
 
                     }
 
@@ -164,8 +160,7 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    private void build()
-    {
+    private void build() {
 
         initSpinner(userCategories, sUserCategory);
         initSpinner(userStreets, sUserStreet);
@@ -261,7 +256,6 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
         return networkInfo != null && networkInfo.isConnectedOrConnecting();
 
     }
-
 
 
     private void onCreateRequest() {
@@ -370,8 +364,7 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    private void onDatePickerDialog(final DatePickerDialog.OnDateSetListener dateSetListener)
-    {
+    private void onDatePickerDialog(final DatePickerDialog.OnDateSetListener dateSetListener) {
 
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
@@ -390,8 +383,7 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    private DatePickerDialog.OnDateSetListener onDateSetListener(final TextView textView)
-    {
+    private DatePickerDialog.OnDateSetListener onDateSetListener(final TextView textView) {
 
         return (datePicker, year, month, day) ->
         {
@@ -403,8 +395,7 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    private void initSpinner(final String[] items, final Spinner spinner)
-    {
+    private void initSpinner(final String[] items, final Spinner spinner) {
 
         spinner.setSelection(0);
         spinner.setOnItemSelectedListener(this);
@@ -512,28 +503,22 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK)
-        {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
 
             final CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
-            if (result != null)
-            {
+            if (result != null) {
 
-                if (hasFocusOnUserValidId)
-                {
+                if (hasFocusOnUserValidId) {
 
                     userValidIdUri = result.getUri();
                     tvUserValidId.setText(getFileExtension(userValidIdUri));
 
-                }
-                else
-                {
+                } else {
 
                     userSelfieWithIdUri = result.getUri();
                     tvUserSelfieWithId.setText(getFileExtension(userSelfieWithIdUri));
@@ -542,8 +527,7 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
 
             }
 
-        }
-        else onBackPressed();
+        } else onBackPressed();
 
     }
 

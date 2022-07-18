@@ -246,8 +246,7 @@ public class ScheduleFragment extends Fragment {
 
     }
 
-    private void loadUserRequest()
-    {
+    private void loadUserRequest() {
 
         firebaseFirestore
                 .collection("Requests")
@@ -255,13 +254,11 @@ public class ScheduleFragment extends Fragment {
                 .addSnapshotListener((value, error) ->
                 {
 
-                    if (value != null)
-                    {
+                    if (value != null) {
 
                         if (!value.isEmpty())
 
-                            for (QueryDocumentSnapshot snapshot : value)
-                            {
+                            for (QueryDocumentSnapshot snapshot : value) {
 
                                 final RequestModel request = snapshot.toObject(RequestModel.class);
                                 final int requestStatus = request.getRequest_status();
@@ -269,7 +266,8 @@ public class ScheduleFragment extends Fragment {
                                 tvTitle.setText(getTitle(requestStatus));
                                 tvSubtitle.setText(getSubtitle(requestStatus));
 
-                                if (requestStatus == 1 || requestStatus == 2) navSchedule.setVisibility(View.VISIBLE);
+                                if (requestStatus == 1 || requestStatus == 2)
+                                    navSchedule.setVisibility(View.VISIBLE);
 
                                 else navSchedule.setVisibility(View.GONE);
 
@@ -283,8 +281,7 @@ public class ScheduleFragment extends Fragment {
                                 });
                             }
 
-                        else
-                        {
+                        else {
 
                             tvTitle.setText(getTitle(4));
                             tvSubtitle.setText(getSubtitle(4));
@@ -297,11 +294,9 @@ public class ScheduleFragment extends Fragment {
 
     }
 
-    private String getTitle(final int requestStatus)
-    {
+    private String getTitle(final int requestStatus) {
 
-        switch (requestStatus)
-        {
+        switch (requestStatus) {
 
             case 0:
                 return "Request has been submitted";
@@ -320,8 +315,7 @@ public class ScheduleFragment extends Fragment {
 
     }
 
-    private String getSubtitle(final int requestStatus)
-    {
+    private String getSubtitle(final int requestStatus) {
 
         if (requestStatus == 0) return "Your request is being reviewed";
 
