@@ -20,6 +20,12 @@
     <string name="text_select">Select a date</string>
     <string name="hint_enter">Enter a value</string>
     <string name="text_button_create">Create Slot</string>
+    <string name="text_select_1">Select your birthdate</string>
+    <string name="digits_contact">0123456789</string>
+    <string name="hint_enter_1">Enter your contact no.</string>
+    <string name="text_upload">Upload your valid ID</string>
+    <string name="text_upload_1">Upload the selfie</string>
+    <string name="text_button_create_1">Submit Request</string>
 
     <string-array name="VaccineNames">
         <item>Select a Vaccine</item>
