@@ -8,8 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ViewVaccineActivity extends AppCompatActivity
-{
+public class ViewVaccineActivity extends AppCompatActivity {
 
     ImageView ivVaccineImage;
     TextView tvVaccineArmSideEffects;
@@ -31,8 +30,7 @@ public class ViewVaccineActivity extends AppCompatActivity
     SharedPreferences sharedPref;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_vaccine);
@@ -44,8 +42,7 @@ public class ViewVaccineActivity extends AppCompatActivity
 
     }
 
-    private void initViews()
-    {
+    private void initViews() {
 
         getWindow().setStatusBarColor(this.getColor(R.color.color_blue_green));
 
@@ -60,15 +57,13 @@ public class ViewVaccineActivity extends AppCompatActivity
 
     }
 
-    private void initSharedPref()
-    {
+    private void initSharedPref() {
 
         sharedPref = getSharedPreferences("user", MODE_PRIVATE);
 
     }
 
-    private void load()
-    {
+    private void load() {
 
         vaccineId = sharedPref.getInt("vaccine_id", Context.MODE_PRIVATE);
         vaccineImage = sharedPref.getInt("vaccine_image", Context.MODE_PRIVATE);
@@ -83,8 +78,7 @@ public class ViewVaccineActivity extends AppCompatActivity
 
     }
 
-    private void loadVaccine()
-    {
+    private void loadVaccine() {
 
         ivVaccineImage.setImageResource(vaccineImage);
         tvVaccineName.setText(vaccineName);
