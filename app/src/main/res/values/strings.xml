@@ -20,6 +20,12 @@
     <string name="text_select">Select a date</string>
     <string name="hint_enter">Enter a value</string>
     <string name="text_button_create">Create Slot</string>
+    <string name="text_select_1">Select your birthdate</string>
+    <string name="digits_contact">0123456789</string>
+    <string name="hint_enter_1">Enter your contact no.</string>
+    <string name="text_upload">Upload your valid ID</string>
+    <string name="text_upload_1">Upload the selfie</string>
+    <string name="text_button_create_1">Submit Request</string>
 
     <string-array name="VaccineNames">
         <item>Select a Vaccine</item>
@@ -37,5 +43,111 @@
         <item>Manzon</item>
         <item>Talang</item>
         <item>Pagal</item>
+    </string-array>
+
+    <string-array name="UserCategories">
+        <item>Select Priority Category</item>
+        <item>A1 - Health Workers</item>
+        <item>A2 - Senior Citizens</item>
+        <item>A3 - Person with Comorbidities</item>
+        <item>A4 - Economic Frontliners</item>
+        <item>A5 - Indigent Sector</item>
+        <item>B1 - Teachers, Social Workers</item>
+        <item>B2 - Other Government Workers</item>
+        <item>B3 - Other Essential Workers</item>
+        <item>B4 - Socio-Demographic Groups</item>
+        <item>B5 - Overseas Filipino</item>
+        <item>B6 - Other Workforce</item>
+        <item>C - Rest of the Filipino Population</item>
+    </string-array>
+
+    <string-array name="UserStreets">
+        <item>Select Street</item>
+        <item>Abanon</item>
+        <item>Agdao</item>
+        <item>Ano</item>
+        <item>Anando</item>
+        <item>Antipangol</item>
+        <item>Aponit</item>
+        <item>Bacnar</item>
+        <item>Balaya</item>
+        <item>Balayong</item>
+        <item>Baldog</item>
+        <item>Balite Sur</item>
+        <item>Balococ</item>
+        <item>Bani</item>
+        <item>Bocboc</item>
+        <item>Bugallon-Posadas</item>
+        <item>Bogaoan</item>
+        <item>Bolingit</item>
+        <item>Bolosan</item>
+        <item>Bonifacio</item>
+        <item>Buenglat</item>
+        <item>Burgos-Padlan</item>
+        <item>Cacaritan</item>
+        <item>Caingal</item>
+        <item>Calobaoan</item>
+        <item>Calomboyan</item>
+        <item>Burgos-Padlan</item>
+        <item>Cacaritan</item>
+        <item>Caingal</item>
+        <item>Calobaoan</item>
+        <item>Calomboyan</item>
+        <item>Burgos-Padlan</item>
+        <item>Cacaritan</item>
+        <item>Caingal</item>
+        <item>Calobaoan</item>
+        <item>Calomboyan</item>
+        <item>Isla</item>
+        <item>Libas</item>
+        <item>Lilimasan</item>
+        <item>Longos</item>
+        <item>Lucban</item>
+        <item>Mabalbalino</item>
+        <item>Mabini</item>
+        <item>Magtaking</item>
+        <item>Malacañang</item>
+        <item>Maliwara</item>
+        <item>M.Soriano</item>
+        <item>Mamarlao</item>
+        <item>Manzon</item>
+        <item>Matangdem</item>
+        <item>Mestizo Norte</item>
+        <item>Naguilayan</item>
+        <item>Nelintap</item>
+        <item>Padilla-Gomez</item>
+        <item>Pagal</item>
+        <item>Palaming</item>
+        <item>Palaris</item>
+        <item>Palospos</item>
+        <item>Pangalangan</item>
+        <item>Pangoloan</item>
+        <item>Pangpang</item>
+        <item>Paitan-Panoypoy</item>
+        <item>Parayao</item>
+        <item>Payapa</item>
+        <item>Payar</item>
+        <item>Perez Boulevard</item>
+        <item>PNR Site</item>
+        <item>Polo</item>
+        <item>Quezon Boulevard</item>
+        <item>Quintong</item>
+        <item>Rizal Avenue</item>
+        <item>Roxas Boulevard</item>
+        <item>Salinap</item>
+        <item>San Juan</item>
+        <item>San Pedro</item>
+        <item>Sapinit</item>
+        <item>Supo</item>
+        <item>Talang</item>
+        <item>Taloy</item>
+        <item>Tamayo</item>
+        <item>Tandoc</item>
+        <item>Tarece</item>
+        <item>Tarectec</item>
+        <item>Tayambani</item>
+        <item>Tebag</item>
+        <item>Turac</item>
+        <item>Tangdang Sora</item>
     </string-array>
 </resources>

@@ -2,6 +2,7 @@ package com.codewithjosh.ImmuniNation2k21.fragments.users;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -20,8 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.codewithjosh.ImmuniNation2k21.R;
+import com.codewithjosh.ImmuniNation2k21.ViewScheduleActivity;
 import com.codewithjosh.ImmuniNation2k21.adapters.SlotAdapter;
 import com.codewithjosh.ImmuniNation2k21.adapters.VaccineAdapter;
+import com.codewithjosh.ImmuniNation2k21.models.RequestModel;
 import com.codewithjosh.ImmuniNation2k21.models.SlotModel;
 import com.codewithjosh.ImmuniNation2k21.models.UserModel;
 import com.codewithjosh.ImmuniNation2k21.models.VaccineModel;
@@ -49,6 +52,7 @@ public class ScheduleFragment extends Fragment {
     Context context;
     FirebaseFirestore firebaseFirestore;
     SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
     VaccineAdapter vaccineAdapter;
     private SlotAdapter slotAdapter;
     private List<SlotModel> slots;
@@ -65,6 +69,7 @@ public class ScheduleFragment extends Fragment {
         load();
         loadUser();
         loadSlots();
+        loadUserRequest();
 
         return view;
 
@@ -113,6 +118,7 @@ public class ScheduleFragment extends Fragment {
     private void initSharedPref() {
 
         sharedPref = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
 
     }
 
@@ -237,6 +243,87 @@ public class ScheduleFragment extends Fragment {
                     });
 
         }
+
+    }
+
+    private void loadUserRequest() {
+
+        firebaseFirestore
+                .collection("Requests")
+                .whereEqualTo("user_id", userId)
+                .addSnapshotListener((value, error) ->
+                {
+
+                    if (value != null) {
+
+                        if (!value.isEmpty())
+
+                            for (QueryDocumentSnapshot snapshot : value) {
+
+                                final RequestModel request = snapshot.toObject(RequestModel.class);
+                                final int requestStatus = request.getRequest_status();
+
+                                tvTitle.setText(getTitle(requestStatus));
+                                tvSubtitle.setText(getSubtitle(requestStatus));
+
+                                if (requestStatus == 1 || requestStatus == 2)
+                                    navSchedule.setVisibility(View.VISIBLE);
+
+                                else navSchedule.setVisibility(View.GONE);
+
+                                navSchedule.setOnClickListener(v ->
+                                {
+
+                                    editor.putInt("request_status", requestStatus);
+                                    editor.apply();
+                                    context.startActivity(new Intent(context, ViewScheduleActivity.class));
+
+                                });
+                            }
+
+                        else {
+
+                            tvTitle.setText(getTitle(4));
+                            tvSubtitle.setText(getSubtitle(4));
+
+                        }
+
+                    }
+
+                });
+
+    }
+
+    private String getTitle(final int requestStatus) {
+
+        switch (requestStatus) {
+
+            case 0:
+                return "Request has been submitted";
+
+            case 1:
+                return "Schedule has been approved";
+
+            case 2:
+                return "Second dose ready";
+
+            case 3:
+                return "Congratulations!";
+
+        }
+        return "Let's get vaccinated";
+
+    }
+
+    private String getSubtitle(final int requestStatus) {
+
+        if (requestStatus == 0) return "Your request is being reviewed";
+
+        else if (requestStatus > 0 && requestStatus < 3) return "Check out your schedule proof";
+
+        else if (requestStatus == 3) return "You're fully vaccinated";
+
+        return "Please select your schedule";
 
     }
 

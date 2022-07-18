@@ -10,8 +10,8 @@ android {
         applicationId "com.codewithjosh.ImmuniNation2k21"
         minSdk 23
         targetSdk 32
-        versionCode 3
-        versionName "0.3.0"
+        versionCode 4
+        versionName "0.4.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,4 +48,10 @@ dependencies {
 
 //    add dependency on Bumptech Glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
+
+//    add dependency on A. Teplitzki, Edmodo AndroidImageCropper
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+
+//    add dependency on Google Firebase Cloud Storage
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
 }
