@@ -20,8 +20,7 @@ public class AdminRequestFragment extends Fragment {
     TabAdapter tabAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_admin_request, container, false);
@@ -33,14 +32,12 @@ public class AdminRequestFragment extends Fragment {
 
     }
 
-    private void initViews(final View view)
-    {
+    private void initViews(final View view) {
 
         tabLayout = view.findViewById(R.id.tab_layout);
         viewPager2 = view.findViewById(R.id.view_pager_2);
 
-        if (getActivity() != null)
-        {
+        if (getActivity() != null) {
 
             final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             tabAdapter = new TabAdapter(fragmentManager, getLifecycle());
@@ -58,40 +55,33 @@ public class AdminRequestFragment extends Fragment {
 
     }
 
-    private void build()
-    {
+    private void build() {
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
-        {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
-            public void onTabSelected(TabLayout.Tab tab)
-            {
+            public void onTabSelected(TabLayout.Tab tab) {
 
                 viewPager2.setCurrentItem(tab.getPosition());
 
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab)
-            {
+            public void onTabUnselected(TabLayout.Tab tab) {
 
             }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab)
-            {
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
 
         });
 
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback()
-        {
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
 
             @Override
-            public void onPageSelected(int position)
-            {
+            public void onPageSelected(int position) {
 
                 tabLayout.selectTab(tabLayout.getTabAt(position));
 

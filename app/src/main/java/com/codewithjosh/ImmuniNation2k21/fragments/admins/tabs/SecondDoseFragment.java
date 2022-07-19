@@ -1,12 +1,11 @@
 package com.codewithjosh.ImmuniNation2k21.fragments.admins.tabs;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.codewithjosh.ImmuniNation2k21.R;
 

@@ -10,11 +10,9 @@ import com.codewithjosh.ImmuniNation2k21.fragments.admins.tabs.FirstDoseFragment
 import com.codewithjosh.ImmuniNation2k21.fragments.admins.tabs.ScheduleRequestFragment;
 import com.codewithjosh.ImmuniNation2k21.fragments.admins.tabs.SecondDoseFragment;
 
-public class TabAdapter extends FragmentStateAdapter
-{
+public class TabAdapter extends FragmentStateAdapter {
 
-    public TabAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle)
-    {
+    public TabAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
 
         super(fragmentManager, lifecycle);
 
@@ -22,11 +20,9 @@ public class TabAdapter extends FragmentStateAdapter
 
     @NonNull
     @Override
-    public Fragment createFragment(int position)
-    {
+    public Fragment createFragment(int position) {
 
-        switch (position)
-        {
+        switch (position) {
 
             case 1:
                 return new FirstDoseFragment();
@@ -40,8 +36,7 @@ public class TabAdapter extends FragmentStateAdapter
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
 
         return 3;
 
