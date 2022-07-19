@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.admins.tabs.ScheduleRequestFragment">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_slots"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="10dp" />
+    tools:context=".RequestApprovalActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
