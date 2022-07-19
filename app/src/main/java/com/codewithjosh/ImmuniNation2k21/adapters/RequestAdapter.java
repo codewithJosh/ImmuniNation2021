@@ -1,6 +1,8 @@
 package com.codewithjosh.ImmuniNation2k21.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.codewithjosh.ImmuniNation2k21.R;
+import com.codewithjosh.ImmuniNation2k21.RequestApprovalActivity;
 import com.codewithjosh.ImmuniNation2k21.models.RequestModel;
 import com.codewithjosh.ImmuniNation2k21.models.SlotModel;
 import com.codewithjosh.ImmuniNation2k21.models.UserModel;
@@ -31,6 +34,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     public int requestStatus;
     DateFormat dateFormat;
     FirebaseFirestore firebaseFirestore;
+    SharedPreferences.Editor editor;
 
     public RequestAdapter(final Context context, final List<RequestModel> requests, final int requestStatus)
     {
@@ -66,8 +70,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         final String userId = request.getUser_id();
         final String userName = request.getUser_name();
         final String slotId = request.getSlot_id();
+        final String requestId = request.getRequest_id();
 
         initInstances();
+        initSharedPref();
 
         tvUserName.setText(userName);
 
@@ -75,12 +81,25 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
         loadRequestStatus(slotId, tvRequestStatus);
 
+        holder.itemView.setOnClickListener(v ->
+        {
+
+            if (requestStatus == 0) onRequestApproval(requestId, slotId);
+
+        });
+
     }
 
     private void initInstances()
     {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+    }
+
+    private void initSharedPref() {
+
+        editor = context.getSharedPreferences("user", Context.MODE_PRIVATE).edit();
 
     }
 
@@ -158,6 +177,15 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
                 return "To be vaccinated on " + vaccineSecondDoseDateFormat + " at " + vaccineSite;
 
         } return "Request a slot for " + vaccineName + " on " + vaccineFirstDoseDateFormat + " at " + vaccineSite;
+
+    }
+
+    private void onRequestApproval(final String requestId, final String slotId) {
+
+        editor.putString("request_id", requestId);
+        editor.putString("slot_id", slotId);
+        editor.apply();
+        context.startActivity(new Intent(context, RequestApprovalActivity.class));
 
     }
 
