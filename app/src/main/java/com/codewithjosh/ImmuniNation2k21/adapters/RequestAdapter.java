@@ -26,8 +26,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHolder>
-{
+public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHolder> {
 
     public Context context;
     public List<RequestModel> requests;
@@ -36,8 +35,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     FirebaseFirestore firebaseFirestore;
     SharedPreferences.Editor editor;
 
-    public RequestAdapter(final Context context, final List<RequestModel> requests, final int requestStatus)
-    {
+    public RequestAdapter(final Context context, final List<RequestModel> requests, final int requestStatus) {
 
         this.context = context;
         this.requests = requests;
@@ -47,8 +45,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-    {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_request, parent, false);
         return new ViewHolder(view);
@@ -56,8 +53,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         final RequestModel request = requests.get(position);
 
@@ -90,8 +86,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     }
 
-    private void initInstances()
-    {
+    private void initInstances() {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -167,8 +162,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         final String vaccineFirstDoseDateFormat = dateFormat.format(vaccineFirstDoseDate);
         final String vaccineSecondDoseDateFormat = dateFormat.format(vaccineSecondDoseDate);
 
-        switch (requestStatus)
-        {
+        switch (requestStatus) {
 
             case 1:
                 return "To be vaccinated on " + vaccineFirstDoseDateFormat + " at " + vaccineSite;
@@ -176,7 +170,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
             case 2:
                 return "To be vaccinated on " + vaccineSecondDoseDateFormat + " at " + vaccineSite;
 
-        } return "Request a slot for " + vaccineName + " on " + vaccineFirstDoseDateFormat + " at " + vaccineSite;
+        }
+        return "Request a slot for " + vaccineName + " on " + vaccineFirstDoseDateFormat + " at " + vaccineSite;
 
     }
 
@@ -196,15 +191,13 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CircleImageView civUserImage;
         public TextView tvUserName;
         public TextView tvRequestStatus;
 
-        public ViewHolder(@NonNull View itemView)
-        {
+        public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
 

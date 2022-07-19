@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.codewithjosh.ImmuniNation2k21.R;
 import com.codewithjosh.ImmuniNation2k21.adapters.RequestAdapter;
 import com.codewithjosh.ImmuniNation2k21.models.RequestModel;
-import com.codewithjosh.ImmuniNation2k21.models.SlotModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -34,8 +33,7 @@ public class ScheduleRequestFragment extends Fragment {
     private List<RequestModel> requests;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_schedule_request, container, false);
