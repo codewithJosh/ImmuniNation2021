@@ -1,65 +1,123 @@
 package com.codewithjosh.ImmuniNation2k21.fragments.admins.tabs;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.codewithjosh.ImmuniNation2k21.R;
+import com.codewithjosh.ImmuniNation2k21.adapters.RequestAdapter;
+import com.codewithjosh.ImmuniNation2k21.models.RequestModel;
+import com.codewithjosh.ImmuniNation2k21.models.SlotModel;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ScheduleRequestFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class ScheduleRequestFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ScheduleRequestFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ScheduleRequestFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ScheduleRequestFragment newInstance(String param1, String param2) {
-        ScheduleRequestFragment fragment = new ScheduleRequestFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    RecyclerView recyclerSlots;
+    int requestStatus;
+    Context context;
+    FirebaseFirestore firebaseFirestore;
+    private RequestAdapter requestAdapter;
+    private List<RequestModel> requests;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule_request, container, false);
+        View view = inflater.inflate(R.layout.fragment_schedule_request, container, false);
+
+        initViews(view);
+        initInstances();
+        loadRequests();
+
+        return view;
+
     }
+
+    private void initViews(final View view) {
+
+        if (getContext() != null) context = getContext();
+
+        recyclerSlots = view.findViewById(R.id.recycler_slots);
+
+        initRecyclerView();
+
+        requestStatus = 0;
+
+        requests = new ArrayList<>();
+        requestAdapter = new RequestAdapter(context, requests, requestStatus);
+        recyclerSlots.setAdapter(requestAdapter);
+
+    }
+
+    private void initRecyclerView() {
+
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerSlots.setLayoutManager(linearLayoutManager);
+        recyclerSlots.setHasFixedSize(true);
+
+    }
+
+    private void initInstances() {
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+    }
+
+    private void loadRequests() {
+
+        firebaseFirestore
+                .collection("Requests")
+                .whereEqualTo("request_status", requestStatus)
+                .addSnapshotListener((value, error) ->
+                {
+
+                    if (value != null) {
+
+                        if (isConnected()) onLoadRequests(value);
+
+                        else
+                            Toast.makeText(context, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                });
+
+    }
+
+    private boolean isConnected() {
+
+        final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
+
+    }
+
+    private void onLoadRequests(final QuerySnapshot value) {
+
+        requests.clear();
+        for (QueryDocumentSnapshot snapshot : value) {
+
+            final RequestModel request = snapshot.toObject(RequestModel.class);
+            requests.add(request);
+            requestAdapter.notifyDataSetChanged();
+
+        }
+
+    }
+
 }
