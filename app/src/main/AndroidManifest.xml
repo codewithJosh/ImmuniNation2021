@@ -18,6 +18,10 @@
         android:theme="@style/Theme.ImmuniNation"
         tools:targetApi="31">
         <activity
+            android:name=".ViewImageActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name=".RequestApprovalActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />

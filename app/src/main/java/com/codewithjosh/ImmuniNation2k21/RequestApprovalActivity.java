@@ -1,6 +1,7 @@
 package com.codewithjosh.ImmuniNation2k21;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
@@ -38,6 +39,7 @@ public class RequestApprovalActivity extends AppCompatActivity
     DocumentReference documentRef;
     FirebaseFirestore firebaseFirestore;
     SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -84,6 +86,7 @@ public class RequestApprovalActivity extends AppCompatActivity
     private void initSharedPref() {
 
         sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
 
     }
 
@@ -150,6 +153,8 @@ public class RequestApprovalActivity extends AppCompatActivity
                             final String userSelfieWithId = request.getUser_selfie_with_id();
                             final String userStreet = request.getUser_street();
                             final String userValidId = request.getUser_valid_id();
+                            final String userSelfieWithIdImage = request.getUser_selfie_with_id_image();
+                            final String userValidIdImage = request.getUser_valid_id_image();
 
                             tvUserBirthDate.setText(userBirthDateFormat);
                             tvUserCategory.setText(userCategory);
@@ -159,11 +164,23 @@ public class RequestApprovalActivity extends AppCompatActivity
                             tvUserStreet.setText(userStreet);
                             tvUserValidId.setText(userValidId);
 
+                            tvUserValidId.setOnClickListener(v -> onViewImage(userValidIdImage));
+
+                            tvUserSelfieWithId.setOnClickListener(v -> onViewImage(userSelfieWithIdImage));
+
                         }
 
                     }
 
                 });
+
+    }
+
+    private void onViewImage(final String image) {
+
+        editor.putString("image", image);
+        editor.apply();
+        startActivity(new Intent(this, ViewImageActivity.class));
 
     }
 
