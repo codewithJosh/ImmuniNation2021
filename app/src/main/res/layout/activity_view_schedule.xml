@@ -31,21 +31,21 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:text="Manzon"
             android:id="@+id/tv_vaccine_site"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:text="Manzon"
             android:textAlignment="center"
             android:textColor="?attr/colorSecondary"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/tv_vaccine_name" />
 
         <TextView
-            android:text="Jul 20, 2022"
             android:id="@+id/tv_vaccine_dose_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Jul 20, 2022"
             android:textAlignment="center"
             android:textColor="?attr/colorSecondary"
             android:textSize="16sp"

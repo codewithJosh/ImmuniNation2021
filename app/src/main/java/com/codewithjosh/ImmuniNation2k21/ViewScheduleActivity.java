@@ -23,8 +23,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ViewScheduleActivity extends AppCompatActivity
-{
+public class ViewScheduleActivity extends AppCompatActivity {
 
     ImageView ivQRCode;
     ImageView ivVaccineImage;
@@ -38,8 +37,7 @@ public class ViewScheduleActivity extends AppCompatActivity
     SharedPreferences sharedPref;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_schedule);
@@ -52,8 +50,7 @@ public class ViewScheduleActivity extends AppCompatActivity
 
     }
 
-    private void initViews()
-    {
+    private void initViews() {
 
         getWindow().setNavigationBarColor(getColor(R.color.color_blue_green));
 
@@ -94,8 +91,7 @@ public class ViewScheduleActivity extends AppCompatActivity
                 .addOnSuccessListener(documentSnapshot ->
                 {
 
-                    if (documentSnapshot != null && !documentSnapshot.isEmpty())
-                    {
+                    if (documentSnapshot != null && !documentSnapshot.isEmpty()) {
 
                         for (QueryDocumentSnapshot snapshot : documentSnapshot) {
 
@@ -111,13 +107,11 @@ public class ViewScheduleActivity extends AppCompatActivity
                                     .addOnSuccessListener(_documentSnapshot ->
                                     {
 
-                                        if (_documentSnapshot != null && _documentSnapshot.exists())
-                                        {
+                                        if (_documentSnapshot != null && _documentSnapshot.exists()) {
 
                                             final SlotModel slot = _documentSnapshot.toObject(SlotModel.class);
 
-                                            if (slot != null)
-                                            {
+                                            if (slot != null) {
 
                                                 final String ref = "Reference Code: " + requestId;
                                                 final Date vaccineDoseDate = requestStatus == 1
