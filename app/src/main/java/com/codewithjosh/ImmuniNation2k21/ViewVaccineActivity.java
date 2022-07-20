@@ -1,6 +1,5 @@
 package com.codewithjosh.ImmuniNation2k21;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;

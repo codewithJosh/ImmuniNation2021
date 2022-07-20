@@ -8,16 +8,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
-public class ViewImageActivity extends AppCompatActivity
-{
+public class ViewImageActivity extends AppCompatActivity {
 
     ImageView ivImage;
     String image;
     SharedPreferences sharedPref;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_image);
