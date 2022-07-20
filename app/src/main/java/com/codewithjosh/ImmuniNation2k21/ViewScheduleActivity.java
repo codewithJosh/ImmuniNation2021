@@ -4,11 +4,25 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ViewScheduleActivity extends AppCompatActivity {
+public class ViewScheduleActivity extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_schedule);
+
+        initViews();
+
     }
+
+    private void initViews()
+    {
+
+        getWindow().setNavigationBarColor(getColor(R.color.color_blue_green));
+
+    }
+
 }
