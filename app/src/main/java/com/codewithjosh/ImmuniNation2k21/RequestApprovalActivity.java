@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class RequestApprovalActivity extends AppCompatActivity
 {
@@ -199,6 +200,17 @@ public class RequestApprovalActivity extends AppCompatActivity
 
         });
 
+
+        btnAccept.setOnClickListener(v ->
+        {
+
+            if (isConnected()) onAccept();
+
+            else Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+
+        });
+
+
     }
 
     private boolean isConnected() {
@@ -228,6 +240,35 @@ public class RequestApprovalActivity extends AppCompatActivity
                                 finish();
 
                             }).addOnFailureListener(e -> Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show());
+
+                });
+
+    }
+
+    private void onAccept() {
+
+        final int requestStatus = 1;
+
+        final HashMap<String, Object> request = new HashMap<>();
+        request.put("request_status", requestStatus);
+
+        documentRef
+                .get()
+                .addOnSuccessListener(documentSnapshot ->
+                {
+
+                    if (documentSnapshot != null && documentSnapshot.exists())
+
+                        documentRef
+                                .update(request)
+                                .addOnSuccessListener(unused ->
+                                {
+
+                                    Toast.makeText(this, "Request has been approved!", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(this, HomeActivity.class));
+                                    finish();
+
+                                }).addOnFailureListener(e -> Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show());
 
                 });
 
