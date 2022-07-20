@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ScheduleRequestFragment extends Fragment {
 
-    RecyclerView recyclerSlots;
+    RecyclerView recyclerRequests;
     int requestStatus;
     Context context;
     FirebaseFirestore firebaseFirestore;
@@ -50,7 +50,7 @@ public class ScheduleRequestFragment extends Fragment {
 
         if (getContext() != null) context = getContext();
 
-        recyclerSlots = view.findViewById(R.id.recycler_slots);
+        recyclerRequests = view.findViewById(R.id.recycler_requests);
 
         initRecyclerView();
 
@@ -58,15 +58,15 @@ public class ScheduleRequestFragment extends Fragment {
 
         requests = new ArrayList<>();
         requestAdapter = new RequestAdapter(context, requests, requestStatus);
-        recyclerSlots.setAdapter(requestAdapter);
+        recyclerRequests.setAdapter(requestAdapter);
 
     }
 
     private void initRecyclerView() {
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerSlots.setLayoutManager(linearLayoutManager);
-        recyclerSlots.setHasFixedSize(true);
+        recyclerRequests.setLayoutManager(linearLayoutManager);
+        recyclerRequests.setHasFixedSize(true);
 
     }
 
