@@ -388,6 +388,7 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
         return (datePicker, year, month, day) ->
         {
 
+            month += 1;
             final String userBirthDate = day + "/" + month + "/" + year;
             textView.setText(userBirthDate);
 
