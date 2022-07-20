@@ -22,8 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-public class RequestApprovalActivity extends AppCompatActivity
-{
+public class RequestApprovalActivity extends AppCompatActivity {
 
     Button btnAccept;
     Button btnReject;
@@ -46,8 +45,7 @@ public class RequestApprovalActivity extends AppCompatActivity
     SharedPreferences.Editor editor;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_approval);
@@ -231,15 +229,15 @@ public class RequestApprovalActivity extends AppCompatActivity
                     if (documentSnapshot != null && documentSnapshot.exists())
 
                         documentRef
-                            .delete()
-                            .addOnSuccessListener(unused ->
-                            {
+                                .delete()
+                                .addOnSuccessListener(unused ->
+                                {
 
-                                Toast.makeText(this, "Request has been removed!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(this, HomeActivity.class));
-                                finish();
+                                    Toast.makeText(this, "Request has been removed!", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(this, HomeActivity.class));
+                                    finish();
 
-                            }).addOnFailureListener(e -> Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show());
+                                }).addOnFailureListener(e -> Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show());
 
                 });
 
