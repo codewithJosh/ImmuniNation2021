@@ -169,7 +169,7 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="@drawable/create_tart_orange_button"
-            android:text="Reject"
+            android:text="@string/text_button_reject"
             android:textAllCaps="false"
             android:textColor="@color/color_tart_orange"
             android:textSize="14sp" />
@@ -184,7 +184,7 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="@drawable/create_negative_180_angle_button"
-            android:text="Accept"
+            android:text="@string/text_button_accept"
             android:textAllCaps="false"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="14sp" />
