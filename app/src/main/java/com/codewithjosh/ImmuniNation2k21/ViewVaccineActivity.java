@@ -65,9 +65,9 @@ public class ViewVaccineActivity extends AppCompatActivity {
 
     private void load() {
 
-        vaccineId = sharedPref.getInt("vaccine_id", Context.MODE_PRIVATE);
-        vaccineImage = sharedPref.getInt("vaccine_image", Context.MODE_PRIVATE);
-        vaccineName = sharedPref.getString("vaccine_name", String.valueOf(Context.MODE_PRIVATE));
+        vaccineId = sharedPref.getInt("vaccine_id", MODE_PRIVATE);
+        vaccineImage = sharedPref.getInt("vaccine_image", MODE_PRIVATE);
+        vaccineName = sharedPref.getString("vaccine_name", String.valueOf(MODE_PRIVATE));
 
         vaccineArmSideEffects = getResources().getStringArray(R.array.VaccineArmSideEffects);
         vaccineBodySideEffects = getResources().getStringArray(R.array.VaccineBodySideEffects);
