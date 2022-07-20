@@ -1,6 +1,7 @@
 package com.codewithjosh.ImmuniNation2k21;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,11 @@ import com.codewithjosh.ImmuniNation2k21.models.RequestModel;
 import com.codewithjosh.ImmuniNation2k21.models.SlotModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -130,6 +136,23 @@ public class ViewScheduleActivity extends AppCompatActivity
                                                 tvVaccineDoseDate.setText(dateFormat.format(vaccineDoseDate));
                                                 tvVaccineName.setText(vaccineName);
                                                 tvVaccineSite.setText(vaccineSite);
+
+                                                final String QRCode = vaccineName + " vaccination schedule approved on " + vaccineDoseDate;
+
+                                                final MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+
+                                                try {
+
+                                                    final BitMatrix bitMatrix = multiFormatWriter.encode(QRCode, BarcodeFormat.QR_CODE, 350, 350);
+                                                    final BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                                                    final Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+                                                    ivQRCode.setImageBitmap(bitmap);
+
+                                                } catch (WriterException e) {
+
+                                                    e.printStackTrace();
+
+                                                }
 
                                             }
 
