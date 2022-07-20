@@ -26,6 +26,8 @@
     <string name="text_upload">Upload your valid ID</string>
     <string name="text_upload_1">Upload the selfie</string>
     <string name="text_button_create_1">Submit Request</string>
+    <string name="text_button_reject">Reject</string>
+    <string name="text_button_accept">Accept</string>
 
     <string-array name="VaccineNames">
         <item>Select a Vaccine</item>
