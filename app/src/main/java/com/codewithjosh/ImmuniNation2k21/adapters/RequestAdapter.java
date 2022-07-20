@@ -155,7 +155,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     private String getRequestStatus(final String vaccineName, final String vaccineSite, final Date vaccineFirstDoseDate, final Date vaccineSecondDoseDate) {
 
-        final String vaccineDoseDateFormat = "MMMM d, yyyy";
+        final String vaccineDoseDateFormat = "MMM d, yyyy";
 
         dateFormat = new SimpleDateFormat(vaccineDoseDateFormat);
 
