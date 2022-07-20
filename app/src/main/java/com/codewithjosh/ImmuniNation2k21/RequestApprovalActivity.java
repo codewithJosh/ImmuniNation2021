@@ -3,9 +3,12 @@ package com.codewithjosh.ImmuniNation2k21;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -54,6 +57,7 @@ public class RequestApprovalActivity extends AppCompatActivity
         load();
         loadUserSlot();
         loadUserRequest();
+        buildButtons();
 
     }
 
@@ -181,6 +185,51 @@ public class RequestApprovalActivity extends AppCompatActivity
         editor.putString("image", image);
         editor.apply();
         startActivity(new Intent(this, ViewImageActivity.class));
+
+    }
+
+    private void buildButtons() {
+
+        btnReject.setOnClickListener(v ->
+        {
+
+            if (isConnected()) onReject();
+
+            else Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+
+        });
+
+    }
+
+    private boolean isConnected() {
+
+        final ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
+
+    }
+
+    private void onReject() {
+
+        documentRef
+                .get()
+                .addOnSuccessListener(documentSnapshot ->
+                {
+
+                    if (documentSnapshot != null && documentSnapshot.exists())
+
+                        documentRef
+                            .delete()
+                            .addOnSuccessListener(unused ->
+                            {
+
+                                Toast.makeText(this, "Request has been removed!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(this, HomeActivity.class));
+                                finish();
+
+                            }).addOnFailureListener(e -> Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show());
+
+                });
 
     }
 
