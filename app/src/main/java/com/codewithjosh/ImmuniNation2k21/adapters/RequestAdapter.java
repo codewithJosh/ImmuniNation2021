@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,10 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.codewithjosh.ImmuniNation2k21.R;
 import com.codewithjosh.ImmuniNation2k21.RequestApprovalActivity;
+import com.codewithjosh.ImmuniNation2k21.VaccineCompletionActivity;
 import com.codewithjosh.ImmuniNation2k21.models.RequestModel;
 import com.codewithjosh.ImmuniNation2k21.models.SlotModel;
 import com.codewithjosh.ImmuniNation2k21.models.UserModel;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -63,17 +66,18 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         final TextView tvRequestStatus = holder.tvRequestStatus;
 
 //        load
-        final String userId = request.getUser_id();
+        final String requestUserId = request.getUser_id();
         final String userName = request.getUser_name();
         final String slotId = request.getSlot_id();
         final String requestId = request.getRequest_id();
+        final String userStreet = request.getUser_street();
 
         initInstances();
         initSharedPref();
 
         tvUserName.setText(userName);
 
-        loadUserImage(userId, civUserImage);
+        loadUserImage(requestUserId, civUserImage);
 
         loadRequestStatus(slotId, tvRequestStatus);
 
@@ -81,6 +85,33 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         {
 
             if (requestStatus == 0) onRequestApproval(requestId, slotId);
+
+            else
+            {
+
+                firebaseFirestore
+                        .collection("Slots")
+                        .whereEqualTo("slot_id", slotId)
+                        .get()
+                        .addOnSuccessListener(documentSnapshot ->
+                        {
+
+                            if (documentSnapshot != null && !documentSnapshot.isEmpty()) {
+
+                                for (QueryDocumentSnapshot snapshot : documentSnapshot) {
+
+                                    final SlotModel slot = snapshot.toObject(SlotModel.class);
+                                    final String vaccineName = slot.getVaccine_name();
+
+                                    onVaccineCompletion(requestId, requestStatus, requestUserId, userName, userStreet, vaccineName);
+
+                                }
+
+                            }
+
+                        });
+
+            }
 
         });
 
@@ -181,6 +212,19 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         editor.putString("slot_id", slotId);
         editor.apply();
         context.startActivity(new Intent(context, RequestApprovalActivity.class));
+
+    }
+
+    private void onVaccineCompletion(final String requestId, final int requestStatus, final String requestUserId, final String userName, final String userStreet, final String vaccineName) {
+
+        editor.putString("request_id", requestId);
+        editor.putInt("request_status", requestStatus);
+        editor.putString("request_user_id", requestUserId);
+        editor.putString("user_name", userName);
+        editor.putString("user_street", userStreet);
+        editor.putString("vaccine_name", vaccineName);
+        editor.apply();
+        context.startActivity(new Intent(context, VaccineCompletionActivity.class));
 
     }
 
