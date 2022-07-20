@@ -120,14 +120,14 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
 
     private void initSharedPref() {
 
-        sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE);
+        sharedPref = getSharedPreferences("user", MODE_PRIVATE);
 
     }
 
     private void load() {
 
-        slotId = sharedPref.getString("slot_id", String.valueOf(Context.MODE_PRIVATE));
-        userId = sharedPref.getString("user_id", String.valueOf(Context.MODE_PRIVATE));
+        slotId = sharedPref.getString("slot_id", String.valueOf(MODE_PRIVATE));
+        userId = sharedPref.getString("user_id", String.valueOf(MODE_PRIVATE));
 
         userCategories = getResources().getStringArray(R.array.UserCategories);
         userStreets = getResources().getStringArray(R.array.UserStreets);
