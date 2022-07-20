@@ -93,6 +93,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
         tvVaccineFirstDoseDate.setText(dateFormat.format(calendar.getTime()));
         calendar.add(Calendar.MONTH, 1);
         tvVaccineSecondDoseDate.setText(dateFormat.format(calendar.getTime()));
+        calendar.add(Calendar.MONTH, -1);
 
     }
 
@@ -213,6 +214,7 @@ public class CreateSlotActivity extends AppCompatActivity implements AdapterView
         return (datePicker, year, month, day) ->
         {
 
+            month += 1;
             final String vaccineDoseDate = day + "/" + month + "/" + year;
             textView.setText(vaccineDoseDate);
 
