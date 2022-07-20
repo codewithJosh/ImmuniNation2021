@@ -88,15 +88,15 @@ public class RequestApprovalActivity extends AppCompatActivity {
 
     private void initSharedPref() {
 
-        sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE);
+        sharedPref = getSharedPreferences("user", MODE_PRIVATE);
         editor = sharedPref.edit();
 
     }
 
     private void load() {
 
-        requestId = sharedPref.getString("request_id", String.valueOf(Context.MODE_PRIVATE));
-        slotId = sharedPref.getString("slot_id", String.valueOf(Context.MODE_PRIVATE));
+        requestId = sharedPref.getString("request_id", String.valueOf(MODE_PRIVATE));
+        slotId = sharedPref.getString("slot_id", String.valueOf(MODE_PRIVATE));
 
         documentRef = firebaseFirestore.collection("Requests").document(requestId);
 
