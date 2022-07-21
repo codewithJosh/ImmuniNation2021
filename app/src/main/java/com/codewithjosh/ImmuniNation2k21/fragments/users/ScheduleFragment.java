@@ -285,6 +285,7 @@ public class ScheduleFragment extends Fragment {
 
                             tvTitle.setText(getTitle(4));
                             tvSubtitle.setText(getSubtitle(4));
+                            navSchedule.setVisibility(View.GONE);
 
                         }
 
