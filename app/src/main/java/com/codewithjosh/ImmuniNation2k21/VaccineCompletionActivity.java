@@ -16,8 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class VaccineCompletionActivity extends AppCompatActivity
-{
+public class VaccineCompletionActivity extends AppCompatActivity {
 
     Button btnPass;
     Button btnFail;
@@ -36,8 +35,7 @@ public class VaccineCompletionActivity extends AppCompatActivity
     SharedPreferences sharedPref;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaccine_completion);
