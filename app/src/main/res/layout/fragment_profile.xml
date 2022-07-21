@@ -75,8 +75,8 @@
         android:id="@+id/tv_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
         android:text="First Dose"
         android:textColor="?attr/colorPrimary"
         android:textSize="16sp"
@@ -123,7 +123,7 @@
                     android:layout_height="match_parent"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_vaccine_first_dose_date"
@@ -143,8 +143,8 @@
         android:id="@+id/tv_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
         android:text="Second Dose"
         android:textColor="?attr/colorPrimary"
         android:textSize="16sp"
@@ -190,7 +190,7 @@
                     android:layout_height="match_parent"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_vaccine_second_dose_date"
