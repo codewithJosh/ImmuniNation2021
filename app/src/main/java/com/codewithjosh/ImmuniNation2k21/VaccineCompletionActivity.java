@@ -31,6 +31,7 @@ public class VaccineCompletionActivity extends AppCompatActivity
     String userName;
     String userStreet;
     String vaccineName;
+    DocumentReference documentRef;
     FirebaseFirestore firebaseFirestore;
     SharedPreferences sharedPref;
 
@@ -100,6 +101,8 @@ public class VaccineCompletionActivity extends AppCompatActivity
         tvUserName.setText(userName);
         tvUserStreet.setText(userStreet);
 
+        documentRef = firebaseFirestore.collection("Requests").document(requestId);
+
     }
 
     private void buildButtons() {
@@ -108,6 +111,14 @@ public class VaccineCompletionActivity extends AppCompatActivity
         {
 
             if (isConnected()) onPass();
+
+            else Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+
+        });
+
+        btnFail.setOnClickListener(v -> {
+
+            if (isConnected()) onFail();
 
             else Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
 
@@ -149,14 +160,10 @@ public class VaccineCompletionActivity extends AppCompatActivity
                                 .update(user)
                                 .addOnSuccessListener(unused -> {
 
-                                    final DocumentReference requestRef = firebaseFirestore
-                                            .collection("Requests")
-                                            .document(requestId);
-
                                     final HashMap<String, Object> request = new HashMap<>();
                                     request.put("request_status", requestStatus + 1);
 
-                                    updateUserRequest(requestRef, request);
+                                    updateUserRequest(documentRef, request);
 
                                 }).addOnFailureListener(e -> Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show());
 
@@ -185,6 +192,29 @@ public class VaccineCompletionActivity extends AppCompatActivity
                                 .addOnSuccessListener(unused -> {
 
                                     Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(this, HomeActivity.class));
+                                    finish();
+
+                                }).addOnFailureListener(e -> Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show());
+
+                });
+
+    }
+
+    private void onFail() {
+
+        documentRef
+                .get()
+                .addOnSuccessListener(documentSnapshot ->
+                {
+
+                    if (documentSnapshot != null && documentSnapshot.exists())
+
+                        documentRef
+                                .delete()
+                                .addOnSuccessListener(unused -> {
+
+                                    Toast.makeText(this, "Failed to attend!", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(this, HomeActivity.class));
                                     finish();
 
