@@ -46,7 +46,7 @@ public class ScheduleFragment extends Fragment {
     TextView tvSubtitle;
     TextView tvTitle;
     TextView tvUserName;
-    TextView tvVaccinationStatus;
+    TextView tvUserVaccinationStatus;
     String userId;
     Activity activity;
     Context context;
@@ -88,7 +88,7 @@ public class ScheduleFragment extends Fragment {
         tvSubtitle = view.findViewById(R.id.tv_subtitle);
         tvTitle = view.findViewById(R.id.tv_title);
         tvUserName = view.findViewById(R.id.tv_user_name);
-        tvVaccinationStatus = view.findViewById(R.id.tv_vaccination_status);
+        tvUserVaccinationStatus = view.findViewById(R.id.tv_user_vaccination_status);
 
         initRecyclerView(recyclerSlots);
 
@@ -148,7 +148,7 @@ public class ScheduleFragment extends Fragment {
 
                             Glide.with(context).load(userImage).into(civUserImage);
                             tvUserName.setText(userName);
-                            tvVaccinationStatus.setText(getVaccinationStatus(userVaccinationStatus));
+                            tvUserVaccinationStatus.setText(getUserVaccinationStatus(userVaccinationStatus));
 
                         }
 
@@ -158,18 +158,18 @@ public class ScheduleFragment extends Fragment {
 
     }
 
-    private String getVaccinationStatus(final int userVaccinationStatus) {
+    private String getUserVaccinationStatus(final int userVaccinationStatus) {
 
         switch (userVaccinationStatus) {
-
-            case 0:
-                return "Not yet vaccinated";
 
             case 1:
                 return "First dose complete";
 
+            case 2:
+                return "Fully vaccinated";
+
         }
-        return "Fully vaccinated";
+        return "Not yet vaccinated";
 
     }
 
