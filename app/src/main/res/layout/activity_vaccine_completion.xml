@@ -1,8 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     tools:context=".VaccineCompletionActivity">
+
+    <TextView
+        android:id="@+id/tv_dose_completion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:textAlignment="center"
+        android:textColor="?attr/colorSecondary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_vaccine_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tv_dose_completion" />
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tv_vaccine_name" />
+
+    <View
+        android:id="@+id/v"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/color_chinese_white"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="name"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="?attr/colorSecondary"
+        android:textSize="12.5sp"
+        app:layout_constraintTop_toBottomOf="@id/v" />
+
+    <TextView
+        android:id="@+id/tv_user_street"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+    <View
+        android:id="@+id/v_1"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/color_chinese_white"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_street" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="address"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="?attr/colorSecondary"
+        android:textSize="12.5sp"
+        app:layout_constraintTop_toBottomOf="@id/v_1" />
+
+    <TextView
+        android:id="@+id/tv_waiting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/create_primary_decoration_round"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="12dp"
+        android:text="Waiting for Arrival"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_address" />
+
+    <Button
+        android:id="@+id/btn_pass"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/create_negative_180_angle_button"
+        android:textAllCaps="false"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_waiting"
+        app:layout_constraintStart_toStartOf="@id/tv_waiting"
+        app:layout_constraintTop_toBottomOf="@id/tv_waiting" />
+
+    <Button
+        android:id="@+id/btn_fail"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/create_tart_orange_button"
+        android:text="@string/text_button_remove"
+        android:textAllCaps="false"
+        android:textColor="@color/color_tart_orange"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/btn_pass"
+        app:layout_constraintStart_toStartOf="@id/btn_pass"
+        app:layout_constraintTop_toBottomOf="@id/btn_pass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
