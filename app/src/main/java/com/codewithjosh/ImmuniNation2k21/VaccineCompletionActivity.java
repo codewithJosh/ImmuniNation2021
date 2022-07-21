@@ -1,13 +1,20 @@
 package com.codewithjosh.ImmuniNation2k21;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class VaccineCompletionActivity extends AppCompatActivity
 {
@@ -38,6 +45,7 @@ public class VaccineCompletionActivity extends AppCompatActivity
         initInstances();
         initSharedPref();
         load();
+        buildButtons();
 
     }
 
@@ -91,6 +99,98 @@ public class VaccineCompletionActivity extends AppCompatActivity
         tvVaccineName.setText(vaccineName);
         tvUserName.setText(userName);
         tvUserStreet.setText(userStreet);
+
+    }
+
+    private void buildButtons() {
+
+        btnPass.setOnClickListener(v ->
+        {
+
+            if (isConnected()) onPass();
+
+            else Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+
+        });
+
+    }
+
+    private boolean isConnected() {
+
+        final ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
+
+    }
+
+    private void onPass() {
+
+        final DocumentReference userRef = firebaseFirestore
+                .collection("Users")
+                .document(requestUserId);
+
+        final HashMap<String, Object> user = new HashMap<>();
+        user.put("user_vaccination_status", requestStatus);
+
+        updateUser(userRef, user);
+
+    }
+
+    private void updateUser(final DocumentReference userRef, final HashMap<String, Object> user) {
+
+        userRef
+                .get()
+                .addOnSuccessListener(documentSnapshot ->
+                {
+
+                    if (documentSnapshot != null && documentSnapshot.exists())
+
+                        userRef
+                                .update(user)
+                                .addOnSuccessListener(unused -> {
+
+                                    final DocumentReference requestRef = firebaseFirestore
+                                            .collection("Requests")
+                                            .document(requestId);
+
+                                    final HashMap<String, Object> request = new HashMap<>();
+                                    request.put("request_status", requestStatus + 1);
+
+                                    updateUserRequest(requestRef, request);
+
+                                }).addOnFailureListener(e -> Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show());
+
+                });
+
+    }
+
+    private void updateUserRequest(final DocumentReference requestRef, final HashMap<String, Object> request) {
+
+        final String text = "% Dose Complete!".replace(
+                "%",
+                requestStatus == 1
+                        ? "First"
+                        : "Second"
+        );
+
+        requestRef
+                .get()
+                .addOnSuccessListener(documentSnapshot ->
+                {
+
+                    if (documentSnapshot != null && documentSnapshot.exists())
+
+                        requestRef
+                                .update(request)
+                                .addOnSuccessListener(unused -> {
+
+                                    Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(this, HomeActivity.class));
+                                    finish();
+
+                                }).addOnFailureListener(e -> Toast.makeText(this, "Please Contact Your Service Provider", Toast.LENGTH_SHORT).show());
+
+                });
 
     }
 
