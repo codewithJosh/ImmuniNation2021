@@ -28,6 +28,7 @@
     <string name="text_button_create_1">Submit Request</string>
     <string name="text_button_reject">Reject</string>
     <string name="text_button_accept">Accept</string>
+    <string name="text_button_remove">Remove from list</string>
 
     <string-array name="VaccineNames">
         <item>Select a Vaccine</item>
