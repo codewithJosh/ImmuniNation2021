@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_black_ff">#FF000000</color>
     <color name="color_white_ff">#FFFFFFFF</color>
     <color name="color_chinese_black">#131313</color>
     <color name="color_chinese_white">#E1E1E1</color>

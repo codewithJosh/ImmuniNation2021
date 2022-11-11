@@ -11,7 +11,6 @@
     <string name="hint_last_name">Last Name</string>
     <string name="text_button_register">Create Account</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_admin_schedule">Admin Schedule</string>
     <string name="title_admin_request">Admin Request</string>
     <string name="title_schedule">Schedule</string>
