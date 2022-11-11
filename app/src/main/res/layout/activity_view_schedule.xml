@@ -98,7 +98,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/iv_end_of_proof"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -107,7 +106,6 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/iv_start_of_proof"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
